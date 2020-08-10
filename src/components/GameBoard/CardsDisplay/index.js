@@ -6,6 +6,8 @@ import { Card } from './Card'
 
 export const CardsDisplay = () => {
   const [cards, setCards] = useState([])
+  const [flippedCards, setFlippedCards] = useState([])
+  const [matchedCards, setMatchedCards] = useState([])
 
   useEffect(() => {
     (async () => {
