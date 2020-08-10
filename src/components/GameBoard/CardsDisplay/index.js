@@ -15,6 +15,7 @@ export const CardsDisplay = () => {
 
       setCards(() => fetchedCards.map(card => {
         card.flipped = false
+        card.matched = false
         return card
       }))
     })()
@@ -29,13 +30,14 @@ export const CardsDisplay = () => {
   }
 
   const renderCards = () => {
-    return cards.map(({ flipped, image, suit, value }, i) => {
+    return cards.map(({ flipped, image, matched, suit, value }, i) => {
       return <Card
         flipped={flipped}
         handler={handleCardClick}
         imgSrc={image}
         index={i}
         key={i}
+        matched={matched}
         suit={suit}
         value={value} />
     })
