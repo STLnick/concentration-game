@@ -21,6 +21,10 @@ export const CardsDisplay = () => {
     })()
   }, [])
 
+  useEffect(() => {
+    checkForMatch()
+  }, [flippedCards])
+
   // Test 'matching' cards using just the card value not suit
   // TODO: Change matching logic to take into account the card suit as well
   const checkForMatch = () => {
