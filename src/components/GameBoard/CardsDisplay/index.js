@@ -18,10 +18,23 @@ export const CardsDisplay = () => {
     })()
   }, [])
 
+  const renderCards = () => {
+    return cards.map(({ flipped, image, suit, value }, i) => {
+      return <Card
+        flipped={flipped}
+        handler={handleCardClick}
+        imgSrc={image}
+        index={i}
+        key={i}
+        suit={suit}
+        value={value} />
+    })
+  }
+
   return (
     <div>
       <h3>Cards Display</h3>
-      <Card />
+      {renderCards()}
     </div>
   )
 }
