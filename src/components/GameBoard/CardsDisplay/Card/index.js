@@ -1,10 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import api from 'api'
+export const Card = ({ flipped, handler, imgSrc, index, matched, suit, value }) => {
 
-export const Card = () => {
 
   return (
-    <p>I'm a Card</p>
+    <img
+      alt={`${value} of ${suit}`}
+      data-index={index}
+      onClick={handler}
+      src={flipped ? imgSrc : 'https://source.unsplash.com/random/100x139'}
+      width="100"
+    />
   )
+}
+
+Card.propTypes = {
+  flipped: PropTypes.bool,
+  handler: PropTypes.func,
+  imgSrc: PropTypes.string,
+  matched: PropTypes.bool,
+  suit: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired
+}
+
+Card.defaultProps = {
+  matched: false
 }
