@@ -18,6 +18,14 @@ export const CardsDisplay = () => {
     })()
   }, [])
 
+  const handleCardClick = (e) => {
+    const changedCard = cards[e.target.dataset.index]
+
+    changedCard.flipped = !changedCard.flipped
+
+    setCards(() => cards.map(card => cards.indexOf(card) === cards.indexOf(changedCard) ? changedCard : card))
+  }
+
   const renderCards = () => {
     return cards.map(({ flipped, image, suit, value }, i) => {
       return <Card
