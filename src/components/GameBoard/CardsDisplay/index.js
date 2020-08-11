@@ -9,6 +9,7 @@ import './CardsDisplay.css'
 
 export const CardsDisplay = ({ toggle }) => {
   const [cards, setCards] = useState([])
+  const [firstFlipDone, setFirstFlipDone] = useState(false)
   const [flippedCards, setFlippedCards] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [matchedCards, setMatchedCards] = useState([])
@@ -44,6 +45,12 @@ export const CardsDisplay = ({ toggle }) => {
       toggle()
     }
   }, [matchedCards])
+
+  // Start timer on the first card flip
+  useEffect(() => {
+    if (firstFlipDone)
+      toggle()
+  }, [firstFlipDone])
 
   // TEST 'matching' cards using just the card value not suit
   const checkForMatch = () => {
@@ -85,6 +92,8 @@ export const CardsDisplay = ({ toggle }) => {
   }
 
   const handleFlip = (e) => {
+    if (!firstFlipDone)
+      setFirstFlipDone(true)
 
     // Only flip card if there aren't 2 already flipped
     if (!flippedCards[1]) {
