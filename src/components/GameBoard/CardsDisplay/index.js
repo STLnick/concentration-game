@@ -23,63 +23,67 @@ export const CardsDisplay = () => {
   }, [])
 
   useEffect(() => {
-    checkForMatch()
+    if (flippedCards[1]) {
+      setTimeout(checkForMatch, 1500)
+    }
   }, [flippedCards])
 
-  // Test 'matching' cards using just the card value not suit
-  // TODO: Change matching logic to take into account the card suit as well
+  // TEST 'matching' cards using just the card value not suit
   const checkForMatch = () => {
     // If cards inside of 'flippedCards' have matching values
-    let isMatch = false
-    let matchedCard1 = null
-    let matchedIndex1 = null
-    let matchedCard2 = null
-    let matchedIndex2 = null
-
-    flippedCards.forEach((card, i) => {
-      matchedCard1 = card
-      matchedIndex1 = i
-      flippedCards.forEach((card2, i2) => {
-        if (i !== i2 && card.value === card2.value) {
-          isMatch = true
-          matchedCard2 = card2
-          matchedIndex2 = i2
-          // Change the matching cards property 'flipped: false' and 'matched: true'
-          matchedCard1.flipped = false
-          matchedCard2.flipped = false
-          matchedCard1.matched = true
-          matchedCard2.matched = true
-        }
-      })
-    })
+    const flippedCard1 = flippedCards[0]
+    const flippedCard2 = flippedCards[1]
+    // TODO: Change matching logic to take into account the card suit as well
+    const isMatch = flippedCard1.value === flippedCard2.value
 
     if (isMatch) {
+      // Change matched values to true
+      flippedCard1.matched = true
+      flippedCard2.matched = true
+
       // Place 'matching cards' into 'matchedCards'
-      setMatchedCards([...matchedCards, matchedCard1, matchedCard2])
+      setMatchedCards([...matchedCards, flippedCard1, flippedCard2])
 
-      let newCards = cards.map(card => cards.indexOf(card) === matchedIndex1 ? matchedCard1 : card)
-      newCards = cards.map(card => cards.indexOf(card) === matchedIndex2 ? matchedCard2 : card)
-
-      setCards(newCards)
+      // Replace original cards with matched cards
+      setCards(() => cards.map(card => {
+        if (card.id === flippedCard1.id) {
+          return flippedCard1
+        } else if (card.id === flippedCard2.id) {
+          return flippedCard2
+        }
+        return card
+      }))
     }
 
+    setTimeout(resetFlipped, 1000)
   }
 
-  const handleCardClick = (e) => {
-    const flippedCard = cards[e.target.dataset.index]
+  const resetFlipped = () => {
+    setCards(cards.map(card => {
+      card.flipped = false
+      return card
+    }))
 
-    flippedCard.flipped = !flippedCard.flipped
+    setFlippedCards([])
+  }
 
-    setCards(() => cards.map(card => cards.indexOf(card) === cards.indexOf(flippedCard) ? flippedCard : card))
+  const handleFlip = (e) => {
+    if (!flippedCards[1]) {
+      const flippedCard = cards[e.target.dataset.index]
 
-    setFlippedCards(() => cards.filter(card => card.flipped))
+      flippedCard.flipped = !flippedCard.flipped
+
+      setCards(() => cards.map(card => cards.indexOf(card) === cards.indexOf(flippedCard) ? flippedCard : card))
+
+      setFlippedCards(() => cards.filter(card => card.flipped))
+    }
   }
 
   const renderCards = () => {
     return cards.map(({ flipped, image, matched, suit, value }, i) => {
       return <Card
         flipped={flipped}
-        handler={handleCardClick}
+        handler={handleFlip}
         imgSrc={image}
         index={i}
         key={i}
