@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 
 export const Card = ({ flipped, handler, imgSrc, index, matched, suit, value }) => {
   const btnStyle = {
+    backgroundColor: '#1A4A1C',
+    border: '2px solid #aaa',
+    borderRadius: '5px',
     margin: 0,
     padding: 0
   }
