@@ -4,6 +4,8 @@ import api from 'api'
 
 import { Card } from './Card'
 
+import './CardsDisplay.css'
+
 export const CardsDisplay = () => {
   const [cards, setCards] = useState([])
   const [flippedCards, setFlippedCards] = useState([])
@@ -94,8 +96,7 @@ export const CardsDisplay = () => {
   }
 
   return (
-    <div>
-      <h3>Cards Display</h3>
+    <div className="cards">
       {renderCards()}
     </div>
   )

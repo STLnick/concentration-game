@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 export const Card = ({ flipped, handler, imgSrc, index, matched, suit, value }) => {
   const imgStyle = {
+    borderRadius: '5px',
     margin: '0.25rem'
   }
 
