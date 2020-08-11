@@ -6,8 +6,6 @@ export default {
     const cardsRes = await fetch(`https://deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=12`)
     const cards = await cardsRes.json()
 
-    console.log(cards)
-
     return cards.cards
   }
 }
