@@ -21,12 +21,20 @@ export const CardsDisplay = ({ toggle }) => {
 
       const fetchedCards = await api.index()
 
-      setCards(() => fetchedCards.map((card, index) => {
-        card.id = index
-        card.flipped = false
-        card.matched = false
-        return card
-      }))
+      // Duplicate cards, shuffle Cards and assign new properties
+      const shuffledCardsWithDups = [...JSON.parse(JSON.stringify(fetchedCards)), ...JSON.parse(JSON.stringify(fetchedCards))]
+        // Assign random sort num
+        .map(card => {
+          card.sortNum = Math.random()
+          return card
+        })
+        // Sort based on new sort num
+        .sort((a, b) => a.sortNum - b.sortNum)
+        // Return a 'card' without the sort num or extra images but with new properties: id, flipped, matched
+        .map(({ code, image, suit, value }, index) => ({ code, flipped: false, id: index, image, matched: false, suit, value }))
+
+      // Set cards state
+      setCards(shuffledCardsWithDups)
 
       setIsLoading(false)
     })()
@@ -52,13 +60,11 @@ export const CardsDisplay = ({ toggle }) => {
       toggle()
   }, [firstFlipDone])
 
-  // TEST 'matching' cards using just the card value not suit
   const checkForMatch = () => {
     // If cards inside of 'flippedCards' have matching values
     const flippedCard1 = flippedCards[0]
     const flippedCard2 = flippedCards[1]
-    // TODO: Change matching logic to take into account the card suit as well
-    const isMatch = flippedCard1.value === flippedCard2.value
+    const isMatch = flippedCard1.code === flippedCard2.code
 
     if (isMatch) {
       // Change matched values to true
@@ -91,33 +97,34 @@ export const CardsDisplay = ({ toggle }) => {
     setFlippedCards([])
   }
 
-  const handleFlip = (e) => {
+  const handleFlip = ({ target: { dataset } }) => {
     if (!firstFlipDone)
       setFirstFlipDone(true)
 
-    // Only flip card if there aren't 2 already flipped
     if (!flippedCards[1]) {
-      const flippedCard = cards[e.target.dataset.index]
+      const flippedCard = cards.find(card => card.id === Number(dataset.id))
 
       flippedCard.flipped = !flippedCard.flipped
 
-      setCards(() => cards.map(card => cards.indexOf(card) === cards.indexOf(flippedCard) ? flippedCard : card))
+      setCards(() => cards.map(card => card.id === flippedCard.id ? flippedCard : card))
 
       setFlippedCards(() => cards.filter(card => card.flipped))
     }
   }
 
   const renderCards = () => {
-    return cards.map(({ flipped, image, matched, suit, value }, i) => {
+    return cards.map(({ code, flipped, id, image, matched, suit, value }) => {
       return <Card
+        code={code}
         flipped={flipped}
         handler={handleFlip}
+        id={id}
         imgSrc={image}
-        index={i}
-        key={i}
+        key={id}
         matched={matched}
         suit={suit}
-        value={value} />
+        value={value}
+      />
     })
   }
 
