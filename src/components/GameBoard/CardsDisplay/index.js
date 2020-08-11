@@ -39,6 +39,12 @@ export const CardsDisplay = ({ toggle }) => {
   }, [flippedCards])
 
   // Stop timer if all cards are matched
+  useEffect(() => {
+    if (cards.length !== 0 && matchedCards.length === cards.length) {
+      toggle()
+    }
+  }, [matchedCards])
+
   // TEST 'matching' cards using just the card value not suit
   const checkForMatch = () => {
     // If cards inside of 'flippedCards' have matching values
