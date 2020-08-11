@@ -43,13 +43,11 @@ export const CardsDisplay = () => {
     }
   }, [flippedCards])
 
-  // TEST 'matching' cards using just the card value not suit
   const checkForMatch = () => {
     // If cards inside of 'flippedCards' have matching values
     const flippedCard1 = flippedCards[0]
     const flippedCard2 = flippedCards[1]
-    // TODO: Change matching logic to take into account the card suit as well
-    const isMatch = flippedCard1.value === flippedCard2.value
+    const isMatch = flippedCard1.code === flippedCard2.code
 
     if (isMatch) {
       // Change matched values to true
