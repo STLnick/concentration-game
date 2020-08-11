@@ -13,7 +13,8 @@ export const CardsDisplay = () => {
     (async () => {
       const fetchedCards = await api.index()
 
-      setCards(() => fetchedCards.map(card => {
+      setCards(() => fetchedCards.map((card, index) => {
+        card.id = index
         card.flipped = false
         card.matched = false
         return card
