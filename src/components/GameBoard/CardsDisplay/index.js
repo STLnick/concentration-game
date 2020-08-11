@@ -12,6 +12,7 @@ export const CardsDisplay = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [matchedCards, setMatchedCards] = useState([])
 
+  // Fetch cards and add needed properties to each
   useEffect(() => {
     (async () => {
       setIsLoading(true)
@@ -29,12 +30,14 @@ export const CardsDisplay = () => {
     })()
   }, [])
 
+  // If 2 cards are flipped check for match and flip all back over after 1.5s
   useEffect(() => {
     if (flippedCards[1]) {
       setTimeout(checkForMatch, 1500)
     }
   }, [flippedCards])
 
+  // Stop timer if all cards are matched
   // TEST 'matching' cards using just the card value not suit
   const checkForMatch = () => {
     // If cards inside of 'flippedCards' have matching values
@@ -75,6 +78,8 @@ export const CardsDisplay = () => {
   }
 
   const handleFlip = (e) => {
+
+    // Only flip card if there aren't 2 already flipped
     if (!flippedCards[1]) {
       const flippedCard = cards[e.target.dataset.index]
 
