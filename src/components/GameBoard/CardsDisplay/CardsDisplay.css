@@ -2,6 +2,9 @@
   background-color: var(--primary-green);
   border: 2px solid #aaa;
   border-radius: 5px;
+  display: grid;
+  grid-gap: 0.5rem;
+  grid-template-columns: repeat(4, 1fr);
   margin: 0 1.5rem;
   padding: 0.5rem;
 }
