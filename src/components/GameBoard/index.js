@@ -10,10 +10,13 @@ export const GameBoard = () => {
   const [timerIsRunning, setTimerIsRunning] = useState(false)
 
   useEffect(() => {
-    setTimeout(() => {
-      setTimeLeft(timeLeft - 1)
-    }, 1000)
-  }, [timeLeft])
+    if (timeLeft === 1)
+      setTimerIsRunning(false)
+    if (timerIsRunning) {
+      setTimeout(() => {
+        setTimeLeft(timeLeft - 1)
+      }, 1000)
+    }
 
   const handleTimerToggle = () => {
     setTimerIsRunning(!timerIsRunning)
