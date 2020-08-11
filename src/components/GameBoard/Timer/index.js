@@ -5,8 +5,15 @@ import './Timer.css'
 
 export const Timer = ({ time, toggle }) => {
 
+  const formatTimeLeft = () => {
+    const minutes = Math.floor(time / 60)
+    const seconds = time % 60
+
+    return `${minutes}:${seconds === 0 ? '00' : seconds}`
+  }
+
   return (
-    <h3 className="timer">{time}</h3>
+    <h3 className="timer">{formatTimeLeft(time)}</h3>
   )
 }
 
