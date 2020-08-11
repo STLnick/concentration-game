@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export const Timer = ({ toggle }) => {
+import './Timer.css'
 
   return (
     <h3>Timer</h3>
