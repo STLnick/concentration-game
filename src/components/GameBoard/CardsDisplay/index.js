@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 
 import api from 'api'
 
@@ -6,7 +7,7 @@ import { Card } from './Card'
 
 import './CardsDisplay.css'
 
-export const CardsDisplay = () => {
+export const CardsDisplay = ({ toggle }) => {
   const [cards, setCards] = useState([])
   const [flippedCards, setFlippedCards] = useState([])
   const [isLoading, setIsLoading] = useState(false)
@@ -110,4 +111,8 @@ export const CardsDisplay = () => {
       {isLoading ? <h4 className="loading-msg">Loading Cards...</h4> : renderCards()}
     </div>
   )
+}
+
+CardsDisplay.propTypes = {
+  toggle: PropTypes.func
 }
