@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import './Timer.css'
 
-export const Timer = ({ time, toggle }) => {
+export const Timer = ({ time }) => {
 
   const formatTimeLeft = () => {
     const minutes = Math.floor(time / 60)
@@ -23,6 +23,5 @@ export const Timer = ({ time, toggle }) => {
 }
 
 Timer.propTypes = {
-  time: PropTypes.string,
-  toggle: PropTypes.bool.isRequired
+  time: PropTypes.number
 }
