@@ -2,6 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export const Card = ({ flipped, handler, imgSrc, index, matched, suit, value }) => {
+  const btnStyle = {
+    margin: 0,
+    padding: 0
+  }
+
   const imgStyle = {
     borderRadius: '5px',
     margin: '0.25rem'
@@ -20,14 +25,13 @@ export const Card = ({ flipped, handler, imgSrc, index, matched, suit, value }) 
 
   const matchedDiv = <div style={divStyle}></div>
 
-  const cardImg = <img
+  const cardImg = <button onClick={handler} style={btnStyle}><img
     alt={`${value} of ${suit}`}
     data-index={index}
-    onClick={handler}
     src={flipped ? imgSrc : 'https://source.unsplash.com/random/100x139'}
     style={imgStyle}
     width="100"
-  />
+  /></button>
 
   return matched ? matchedDiv : cardImg
 }
