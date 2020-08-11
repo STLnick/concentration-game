@@ -5,3 +5,17 @@
   margin: 0 1.5rem;
   padding: 0.5rem;
 }
+
+/* Temporary Flex styling until we implement GRID */
+.cards {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.loading-msg {
+  color: white;
+  font-size: 2rem;
+  text-align: center;
+}
