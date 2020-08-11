@@ -6,9 +6,8 @@ import { Timer } from './Timer'
 import './GameBoard.css'
 
 export const GameBoard = () => {
+  const [timeLeft, setTimeLeft] = useState('5:00')
   const [timerIsRunning, setTimerIsRunning] = useState(false)
-
-
 
   const handleTimerToggle = () => {
     setTimerIsRunning(!timerIsRunning)
@@ -18,7 +17,7 @@ export const GameBoard = () => {
     <div className="container">
       <h3 className="title">Concentration</h3>
       <CardsDisplay />
-      <Timer toggle={handleTimerToggle} />
+      <Timer time={timeLeft} toggle={handleTimerToggle} />
     </div>
   )
 }
