@@ -82,29 +82,31 @@ export const CardsDisplay = () => {
     setFlippedCards([])
   }
 
-  const handleFlip = (e) => {
+  const handleFlip = ({ target: { dataset } }) => {
     if (!flippedCards[1]) {
-      const flippedCard = cards[e.target.dataset.index]
+      const flippedCard = cards.find(card => card.id === Number(dataset.id))
 
       flippedCard.flipped = !flippedCard.flipped
 
-      setCards(() => cards.map(card => cards.indexOf(card) === cards.indexOf(flippedCard) ? flippedCard : card))
+      setCards(() => cards.map(card => card.id === flippedCard.id ? flippedCard : card))
 
       setFlippedCards(() => cards.filter(card => card.flipped))
     }
   }
 
   const renderCards = () => {
-    return cards.map(({ flipped, image, matched, suit, value }, i) => {
+    return cards.map(({ code, flipped, id, image, matched, suit, value }) => {
       return <Card
+        code={code}
         flipped={flipped}
         handler={handleFlip}
+        id={id}
         imgSrc={image}
-        index={i}
-        key={i}
+        key={id}
         matched={matched}
         suit={suit}
-        value={value} />
+        value={value}
+      />
     })
   }
 

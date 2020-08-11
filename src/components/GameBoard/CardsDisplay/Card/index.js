@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export const Card = ({ flipped, handler, imgSrc, index, matched, suit, value }) => {
+export const Card = ({ code, flipped, handler, id, imgSrc, matched, suit, value }) => {
   const btnStyle = {
     backgroundColor: '#1A4A1C',
     border: '2px solid #aaa',
@@ -28,13 +28,16 @@ export const Card = ({ flipped, handler, imgSrc, index, matched, suit, value }) 
 
   const matchedDiv = <div style={divStyle}></div>
 
-  const cardImg = <button onClick={handler} style={btnStyle}><img
-    alt={`${value} of ${suit}`}
-    data-index={index}
-    src={flipped ? imgSrc : 'https://source.unsplash.com/random/100x139'}
-    style={imgStyle}
-    width="100"
-  /></button>
+  const cardImg = <button data-code={code} data-id={id} onClick={handler} style={btnStyle}>
+    <img
+      alt={`${value} of ${suit}`}
+      data-code={code}
+      data-id={id}
+      src={flipped ? imgSrc : 'https://source.unsplash.com/random/100x139'}
+      style={imgStyle}
+      width="100"
+    />
+  </button>
 
   return matched ? matchedDiv : cardImg
 }
