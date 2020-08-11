@@ -17,6 +17,7 @@ export const GameBoard = () => {
         setTimeLeft(timeLeft - 1)
       }, 1000)
     }
+  }, [timerIsRunning, timeLeft])
 
   const handleTimerToggle = () => {
     setTimerIsRunning(!timerIsRunning)
