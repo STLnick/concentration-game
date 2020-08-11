@@ -18,7 +18,7 @@ export const Card = ({ flipped, handler, imgSrc, index, matched, suit, value }) 
     borderRadius: '5px',
     display: 'inline-block',
     height: '137px',
-    margin: '0.25rem',
+    margin: '0.25rem auto',
     textAlign: 'center',
     width: '98px'
   }
