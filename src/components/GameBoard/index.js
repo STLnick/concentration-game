@@ -26,8 +26,8 @@ export const GameBoard = () => {
   return (
     <div className="container">
       <h3 className="title">Concentration</h3>
-      <CardsDisplay toggle={handleTimerToggle} />
       <Timer time={timeLeft} />
+      <CardsDisplay toggle={handleTimerToggle} />
     </div>
   )
 }
