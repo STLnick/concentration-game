@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 
 import api from 'api'
 
@@ -6,12 +7,14 @@ import { Card } from './Card'
 
 import './CardsDisplay.css'
 
-export const CardsDisplay = () => {
+export const CardsDisplay = ({ toggle }) => {
   const [cards, setCards] = useState([])
+  const [firstFlipDone, setFirstFlipDone] = useState(false)
   const [flippedCards, setFlippedCards] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [matchedCards, setMatchedCards] = useState([])
 
+  // Fetch cards and add needed properties to each
   useEffect(() => {
     (async () => {
       setIsLoading(true)
@@ -37,11 +40,25 @@ export const CardsDisplay = () => {
     })()
   }, [])
 
+  // If 2 cards are flipped check for match and flip all back over after 1.5s
   useEffect(() => {
     if (flippedCards[1]) {
       setTimeout(checkForMatch, 1500)
     }
   }, [flippedCards])
+
+  // Stop timer if all cards are matched
+  useEffect(() => {
+    if (cards.length !== 0 && matchedCards.length === cards.length) {
+      toggle()
+    }
+  }, [matchedCards])
+
+  // Start timer on the first card flip
+  useEffect(() => {
+    if (firstFlipDone)
+      toggle()
+  }, [firstFlipDone])
 
   const checkForMatch = () => {
     // If cards inside of 'flippedCards' have matching values
@@ -81,6 +98,9 @@ export const CardsDisplay = () => {
   }
 
   const handleFlip = ({ target: { dataset } }) => {
+    if (!firstFlipDone)
+      setFirstFlipDone(true)
+
     if (!flippedCards[1]) {
       const flippedCard = cards.find(card => card.id === Number(dataset.id))
 
@@ -113,4 +133,8 @@ export const CardsDisplay = () => {
       {isLoading ? <h4 className="loading-msg">Loading Cards...</h4> : renderCards()}
     </div>
   )
+}
+
+CardsDisplay.propTypes = {
+  toggle: PropTypes.func
 }
