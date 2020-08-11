@@ -18,12 +18,20 @@ export const CardsDisplay = () => {
 
       const fetchedCards = await api.index()
 
-      setCards(() => fetchedCards.map((card, index) => {
-        card.id = index
-        card.flipped = false
-        card.matched = false
-        return card
-      }))
+      // Duplicate cards, shuffle Cards and assign new properties
+      const shuffledCardsWithDups = [...JSON.parse(JSON.stringify(fetchedCards)), ...JSON.parse(JSON.stringify(fetchedCards))]
+        // Assign random sort num
+        .map(card => {
+          card.sortNum = Math.random()
+          return card
+        })
+        // Sort based on new sort num
+        .sort((a, b) => a.sortNum - b.sortNum)
+        // Return a 'card' without the sort num or extra images but with new properties: id, flipped, matched
+        .map(({ code, image, suit, value }, index) => ({ code, flipped: false, id: index, image, matched: false, suit, value }))
+
+      // Set cards state
+      setCards(shuffledCardsWithDups)
 
       setIsLoading(false)
     })()
