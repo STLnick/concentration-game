@@ -9,13 +9,13 @@ export const Card = ({ flipped, handler, imgSrc, index, matched, suit, value }) 
 
   const divStyle = {
     backgroundColor: '#eee',
-    border: '1px solid black',
+    border: '2px solid #aaa',
     borderRadius: '5px',
     display: 'inline-block',
-    height: '138px',
+    height: '137px',
     margin: '0.25rem',
     textAlign: 'center',
-    width: '99px'
+    width: '98px'
   }
 
   const matchedDiv = <div style={divStyle}></div>
