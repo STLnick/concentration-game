@@ -9,10 +9,13 @@ import './CardsDisplay.css'
 export const CardsDisplay = () => {
   const [cards, setCards] = useState([])
   const [flippedCards, setFlippedCards] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
   const [matchedCards, setMatchedCards] = useState([])
 
   useEffect(() => {
     (async () => {
+      setIsLoading(true)
+
       const fetchedCards = await api.index()
 
       setCards(() => fetchedCards.map((card, index) => {
@@ -21,6 +24,8 @@ export const CardsDisplay = () => {
         card.matched = false
         return card
       }))
+
+      setIsLoading(false)
     })()
   }, [])
 
@@ -97,7 +102,7 @@ export const CardsDisplay = () => {
 
   return (
     <div className="cards">
-      {renderCards()}
+      {isLoading ? <h4 className="loading-msg">Loading Cards...</h4> : renderCards()}
     </div>
   )
 }
