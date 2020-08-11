@@ -7,9 +7,14 @@ export const Timer = ({ time, toggle }) => {
 
   const formatTimeLeft = () => {
     const minutes = Math.floor(time / 60)
-    const seconds = time % 60
+    let seconds = time % 60
+    if (seconds === 0) {
+      seconds = '00'
+    } else if (seconds < 10) {
+      seconds = `0${seconds}`
+    }
 
-    return `${minutes}:${seconds === 0 ? '00' : seconds}`
+    return `${minutes}:${seconds}`
   }
 
   return (
