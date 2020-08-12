@@ -40,9 +40,12 @@ export const GameBoard = () => {
 
   useEffect(() => {
     if (timerIsRunning) {
-      setTimeout(() => {
+      const intervalID = setInterval(() => {
         setTimeElapsed(timeElapsed + 1)
       }, 1000)
+
+      // clean-up fxn
+      return () => { clearInterval(intervalID) }
     }
   }, [timerIsRunning, timeElapsed])
 
