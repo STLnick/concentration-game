@@ -53,9 +53,11 @@ export const CardsDisplay = ({ cards, isLoading, setCards, toggle }) => {
         }
         return card
       }))
+      setTimeout(resetFlipped, 750)
+    } else {
+      setTimeout(resetFlipped, 1000)
     }
 
-    setTimeout(resetFlipped, 1000)
   }
 
   const resetFlipped = () => {
