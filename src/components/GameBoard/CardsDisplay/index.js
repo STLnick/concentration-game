@@ -5,7 +5,7 @@ import { Card } from './Card'
 
 import './CardsDisplay.css'
 
-export const CardsDisplay = ({ cards, isLoading, setCards, toggle }) => {
+export const CardsDisplay = ({ cards, flipHandler, isLoading, matchedHandler, resetHandler, toggle }) => {
   const [firstFlipDone, setFirstFlipDone] = useState(false)
   const [flippedCards, setFlippedCards] = useState([])
   const [matchedCards, setMatchedCards] = useState([])
@@ -44,15 +44,8 @@ export const CardsDisplay = ({ cards, isLoading, setCards, toggle }) => {
       // Place 'matching cards' into 'matchedCards'
       setMatchedCards([...matchedCards, flippedCard1, flippedCard2])
 
-      // Replace original cards with matched cards
-      setCards(() => cards.map(card => {
-        if (card.id === flippedCard1.id) {
-          return flippedCard1
-        } else if (card.id === flippedCard2.id) {
-          return flippedCard2
-        }
-        return card
-      }))
+      matchedHandler(flippedCard1, flippedCard2)
+
       setTimeout(resetFlipped, 750)
     } else {
       setTimeout(resetFlipped, 1000)
@@ -61,11 +54,7 @@ export const CardsDisplay = ({ cards, isLoading, setCards, toggle }) => {
   }
 
   const resetFlipped = () => {
-    setCards(cards.map(card => {
-      card.flipped = false
-      return card
-    }))
-
+    resetHandler()
     setFlippedCards([])
   }
 
@@ -86,7 +75,7 @@ export const CardsDisplay = ({ cards, isLoading, setCards, toggle }) => {
 
       flippedCard.flipped = !flippedCard.flipped
 
-      setCards(() => cards.map(card => card.id === flippedCard.id ? flippedCard : card))
+      flipHandler(flippedCard)
 
       setFlippedCards(() => cards.filter(card => card.flipped))
     }
@@ -117,7 +106,9 @@ export const CardsDisplay = ({ cards, isLoading, setCards, toggle }) => {
 
 CardsDisplay.propTypes = {
   cards: PropTypes.array,
+  flipHandler: PropTypes.func,
   isLoading: PropTypes.bool,
-  setCards: PropTypes.func,
+  matchedHandler: PropTypes.func,
+  resetHandler: PropTypes.func,
   toggle: PropTypes.func
 }

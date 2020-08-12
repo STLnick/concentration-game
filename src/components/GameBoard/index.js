@@ -50,13 +50,39 @@ export const GameBoard = () => {
     setTimerIsRunning(!timerIsRunning)
   }
 
+  const handleMatchedCards = (matchCardOne, matchCardTwo) => {
+    // Replace original cards with matched cards
+    setCards(() => cards.map(card => {
+      if (card.id === matchCardOne.id) {
+        return matchCardOne
+      } else if (card.id === matchCardTwo.id) {
+        return matchCardTwo
+      }
+      return card
+    }))
+  }
+
+  const handleFlippedCards = (flippedCard) => {
+    setCards(() => cards.map(card => card.id === flippedCard.id ? flippedCard : card))
+  }
+
+  const handleResetFlipped = () => {
+    setCards(cards.map(card => {
+      card.flipped = false
+      return card
+    }))
+  }
+
   return (
     <div className="container">
       <h3 className="title">Concentration</h3>
       <Timer time={timeElapsed} />
       <CardsDisplay
         cards={cards}
+        flipHandler={handleFlippedCards}
         isLoading={isLoading}
+        matchedHandler={handleMatchedCards}
+        resetHandler={handleResetFlipped}
         setCards={setCards}
         toggle={handleTimerToggle}
       />
