@@ -5,15 +5,7 @@ import './Timer.css'
 
 export const Timer = ({ time }) => {
 
-  let timeStyle
-  if (time < 30)
-    timeStyle = { color: 'red' }
-  else if (time < 60)
-    timeStyle = { color: 'yellow' }
-  else
-    timeStyle = { color: 'white' }
-
-  const formatTimeLeft = () => {
+  const formatTime = () => {
     const minutes = Math.floor(time / 60)
     let seconds = time % 60
     if (seconds === 0) {
@@ -26,7 +18,9 @@ export const Timer = ({ time }) => {
   }
 
   return (
-    <h3 className="timer" style={timeStyle}>{formatTimeLeft(time)}</h3>
+    <h3 className="timer" style={{
+      'color': 'white'
+    }}> {formatTime(time)}</h3>
   )
 }
 
