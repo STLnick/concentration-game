@@ -13,7 +13,7 @@ export const CardsDisplay = ({ cards, isLoading, setCards, toggle }) => {
   // If 2 cards are flipped check for match and flip all back over after 1.5s
   useEffect(() => {
     if (flippedCards[1]) {
-      setTimeout(checkForMatch, 1500)
+      setTimeout(checkForMatch, 1000)
     }
   }, [flippedCards])
 
