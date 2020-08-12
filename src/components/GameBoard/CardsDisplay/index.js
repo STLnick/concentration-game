@@ -73,6 +73,8 @@ export const CardsDisplay = ({ cards, isLoading, setCards, toggle }) => {
 
     if (!flippedCards[1]) {
       const flippedCard = cards.find(card => card.id === Number(dataset.id))
+    // If there aren't 2 cards flipped already AND the card isn't matched
+    // We know it's not matched if it doesn't have 'matched' class on button
 
       flippedCard.flipped = !flippedCard.flipped
 

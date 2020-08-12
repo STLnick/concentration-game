@@ -20,7 +20,7 @@ export const GameBoard = () => {
 
       // Duplicate cards, shuffle Cards and assign new properties
       const shuffledCardsWithDups = fetchedCards.concat(Array.from(fetchedCards))
-        // Assign random sort num
+        // Assign random sort num and remove reference to original object
         .map(card => {
           const cardCopy = { ...card }
           cardCopy.sortNum = Math.random()
