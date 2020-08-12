@@ -7,38 +7,12 @@ import { Card } from './Card'
 
 import './CardsDisplay.css'
 
-export const CardsDisplay = ({ toggle }) => {
-  const [cards, setCards] = useState([])
+export const CardsDisplay = ({ cards, isLoading, setCards, toggle }) => {
   const [firstFlipDone, setFirstFlipDone] = useState(false)
   const [flippedCards, setFlippedCards] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
   const [matchedCards, setMatchedCards] = useState([])
 
-  // Fetch cards and add needed properties to each
-  useEffect(() => {
-    (async () => {
-      setIsLoading(true)
 
-      const fetchedCards = await api.index()
-
-      // Duplicate cards, shuffle Cards and assign new properties
-      const shuffledCardsWithDups = [...JSON.parse(JSON.stringify(fetchedCards)), ...JSON.parse(JSON.stringify(fetchedCards))]
-        // Assign random sort num
-        .map(card => {
-          card.sortNum = Math.random()
-          return card
-        })
-        // Sort based on new sort num
-        .sort((a, b) => a.sortNum - b.sortNum)
-        // Return a 'card' without the sort num or extra images but with new properties: id, flipped, matched
-        .map(({ code, image, suit, value }, index) => ({ code, flipped: false, id: index, image, matched: false, suit, value }))
-
-      // Set cards state
-      setCards(shuffledCardsWithDups)
-
-      setIsLoading(false)
-    })()
-  }, [])
 
   // If 2 cards are flipped check for match and flip all back over after 1.5s
   useEffect(() => {
@@ -136,5 +110,8 @@ export const CardsDisplay = ({ toggle }) => {
 }
 
 CardsDisplay.propTypes = {
+  cards: PropTypes.array,
+  isLoading: PropTypes.bool,
+  setCards: PropTypes.func,
   toggle: PropTypes.func
 }
