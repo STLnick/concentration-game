@@ -19,11 +19,12 @@ export const GameBoard = () => {
       const fetchedCards = await api.index()
 
       // Duplicate cards, shuffle Cards and assign new properties
-      const shuffledCardsWithDups = [...JSON.parse(JSON.stringify(fetchedCards)), ...JSON.parse(JSON.stringify(fetchedCards))]
+      const shuffledCardsWithDups = fetchedCards.concat(Array.from(fetchedCards))
         // Assign random sort num
         .map(card => {
-          card.sortNum = Math.random()
-          return card
+          const cardCopy = { ...card }
+          cardCopy.sortNum = Math.random()
+          return cardCopy
         })
         // Sort based on new sort num
         .sort((a, b) => a.sortNum - b.sortNum)
