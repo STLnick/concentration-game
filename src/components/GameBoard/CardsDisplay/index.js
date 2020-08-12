@@ -74,6 +74,7 @@ export const CardsDisplay = ({ cards, isLoading, setCards, toggle }) => {
 
     // If there aren't 2 cards flipped already AND the card isn't matched
     // We know it's not matched if it doesn't have 'matched' class on button
+    // which will be the only clickable element after card is matched
     if (!flippedCards[1] && !target.classList.contains('matched')) {
       const flippedCard = cards.find(card => card.id === Number(target.dataset.id))
 
