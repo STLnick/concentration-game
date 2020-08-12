@@ -15,22 +15,17 @@ export const Card = ({ code, flipped, handler, id, imgSrc, matched, suit, value 
     margin: '0.25rem'
   }
 
-  const divStyle = {
-    backgroundColor: '#eee',
-    border: '2px solid #aaa',
-    borderRadius: '5px',
-    display: 'inline-block',
-    height: '137px',
-    margin: '0.25rem auto',
-    textAlign: 'center',
-    width: '98px'
-  }
+  const animateClass = matched ? 'flipOutX' : ''
 
-  const matchedDiv = <div style={divStyle}></div>
-
-  const cardImg = <button data-code={code} data-id={id} onClick={handler} style={btnStyle}>
+  return <button
+    className={matched ? 'matched' : null}
+    data-code={code}
+    data-id={id}
+    onClick={handler}
+    style={btnStyle}>
     <img
       alt={`${value} of ${suit}`}
+      className={animateClass}
       data-code={code}
       data-id={id}
       src={flipped ? imgSrc : 'https://source.unsplash.com/random/100x139'}
@@ -38,8 +33,6 @@ export const Card = ({ code, flipped, handler, id, imgSrc, matched, suit, value 
       width="100"
     />
   </button>
-
-  return matched ? matchedDiv : cardImg
 }
 
 Card.propTypes = {
