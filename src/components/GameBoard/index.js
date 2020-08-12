@@ -8,7 +8,7 @@ import './GameBoard.css'
 export const GameBoard = () => {
   const [cards, setCards] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-  const [timeLeft, setTimeLeft] = useState(300)
+  const [timeElapsed, setTimeElapsed] = useState(0)
   const [timerIsRunning, setTimerIsRunning] = useState(false)
 
   // Fetch cards and add needed properties to each
@@ -39,14 +39,12 @@ export const GameBoard = () => {
   }, [])
 
   useEffect(() => {
-    if (timeLeft === 1)
-      setTimerIsRunning(false)
     if (timerIsRunning) {
       setTimeout(() => {
-        setTimeLeft(timeLeft - 1)
+        setTimeElapsed(timeElapsed + 1)
       }, 1000)
     }
-  }, [timerIsRunning, timeLeft])
+  }, [timerIsRunning, timeElapsed])
 
   const handleTimerToggle = () => {
     setTimerIsRunning(!timerIsRunning)
@@ -55,7 +53,7 @@ export const GameBoard = () => {
   return (
     <div className="container">
       <h3 className="title">Concentration</h3>
-      <Timer time={timeLeft} />
+      <Timer time={timeElapsed} />
       <CardsDisplay
         cards={cards}
         isLoading={isLoading}
