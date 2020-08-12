@@ -2,16 +2,12 @@
   background-color: var(--primary-green);
   border: 2px solid #aaa;
   border-radius: 5px;
-  margin: 0 1.5rem;
+  display: grid;
+  grid-gap: 0.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0.5rem auto;
   padding: 0.5rem;
-}
-
-/* Temporary Flex styling until we implement GRID */
-.cards {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  width: calc(90vw - 0.5rem);
 }
 
 .loading-msg {

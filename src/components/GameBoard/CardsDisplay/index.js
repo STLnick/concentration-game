@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 
 import api from 'api'
 
@@ -6,42 +7,38 @@ import { Card } from './Card'
 
 import './CardsDisplay.css'
 
-export const CardsDisplay = () => {
-  const [cards, setCards] = useState([])
+export const CardsDisplay = ({ cards, isLoading, setCards, toggle }) => {
+  const [firstFlipDone, setFirstFlipDone] = useState(false)
   const [flippedCards, setFlippedCards] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
   const [matchedCards, setMatchedCards] = useState([])
 
-  useEffect(() => {
-    (async () => {
-      setIsLoading(true)
 
-      const fetchedCards = await api.index()
 
-      setCards(() => fetchedCards.map((card, index) => {
-        card.id = index
-        card.flipped = false
-        card.matched = false
-        return card
-      }))
-
-      setIsLoading(false)
-    })()
-  }, [])
-
+  // If 2 cards are flipped check for match and flip all back over after 1.5s
   useEffect(() => {
     if (flippedCards[1]) {
       setTimeout(checkForMatch, 1500)
     }
   }, [flippedCards])
 
-  // TEST 'matching' cards using just the card value not suit
+  // Stop timer if all cards are matched
+  useEffect(() => {
+    if (cards.length !== 0 && matchedCards.length === cards.length) {
+      toggle()
+    }
+  }, [matchedCards])
+
+  // Start timer on the first card flip
+  useEffect(() => {
+    if (firstFlipDone)
+      toggle()
+  }, [firstFlipDone])
+
   const checkForMatch = () => {
     // If cards inside of 'flippedCards' have matching values
     const flippedCard1 = flippedCards[0]
     const flippedCard2 = flippedCards[1]
-    // TODO: Change matching logic to take into account the card suit as well
-    const isMatch = flippedCard1.value === flippedCard2.value
+    const isMatch = flippedCard1.code === flippedCard2.code
 
     if (isMatch) {
       // Change matched values to true
@@ -74,29 +71,34 @@ export const CardsDisplay = () => {
     setFlippedCards([])
   }
 
-  const handleFlip = (e) => {
+  const handleFlip = ({ target: { dataset } }) => {
+    if (!firstFlipDone)
+      setFirstFlipDone(true)
+
     if (!flippedCards[1]) {
-      const flippedCard = cards[e.target.dataset.index]
+      const flippedCard = cards.find(card => card.id === Number(dataset.id))
 
       flippedCard.flipped = !flippedCard.flipped
 
-      setCards(() => cards.map(card => cards.indexOf(card) === cards.indexOf(flippedCard) ? flippedCard : card))
+      setCards(() => cards.map(card => card.id === flippedCard.id ? flippedCard : card))
 
       setFlippedCards(() => cards.filter(card => card.flipped))
     }
   }
 
   const renderCards = () => {
-    return cards.map(({ flipped, image, matched, suit, value }, i) => {
+    return cards.map(({ code, flipped, id, image, matched, suit, value }) => {
       return <Card
+        code={code}
         flipped={flipped}
         handler={handleFlip}
+        id={id}
         imgSrc={image}
-        index={i}
-        key={i}
+        key={id}
         matched={matched}
         suit={suit}
-        value={value} />
+        value={value}
+      />
     })
   }
 
@@ -105,4 +107,11 @@ export const CardsDisplay = () => {
       {isLoading ? <h4 className="loading-msg">Loading Cards...</h4> : renderCards()}
     </div>
   )
+}
+
+CardsDisplay.propTypes = {
+  cards: PropTypes.array,
+  isLoading: PropTypes.bool,
+  setCards: PropTypes.func,
+  toggle: PropTypes.func
 }
