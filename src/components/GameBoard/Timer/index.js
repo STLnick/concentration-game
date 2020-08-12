@@ -1,26 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import utils from 'utils'
 
 import './Timer.css'
 
 export const Timer = ({ time }) => {
 
-  const formatTime = () => {
-    const minutes = Math.floor(time / 60)
-    let seconds = time % 60
-    if (seconds === 0) {
-      seconds = '00'
-    } else if (seconds < 10) {
-      seconds = `0${seconds}`
-    }
-
-    return `${minutes}:${seconds}`
-  }
-
   return (
     <h3 className="timer" style={{
       'color': 'white'
-    }}> {formatTime(time)}</h3>
+    }}> {utils.secondsToMinutesAndSeconds(time)}</h3>
   )
 }
 
