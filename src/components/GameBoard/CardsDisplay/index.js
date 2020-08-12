@@ -80,6 +80,10 @@ export const CardsDisplay = ({ cards, isLoading, setCards, toggle }) => {
     if (!flippedCards[1] && !target.classList.contains('matched')) {
       const flippedCard = cards.find(card => card.id === Number(target.dataset.id))
 
+      if (flippedCard.flipped) {
+        return
+      }
+
       flippedCard.flipped = !flippedCard.flipped
 
       setCards(() => cards.map(card => card.id === flippedCard.id ? flippedCard : card))
