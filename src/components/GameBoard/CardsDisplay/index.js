@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import api from 'api'
-
 import { Card } from './Card'
 
 import './CardsDisplay.css'
@@ -11,8 +9,6 @@ export const CardsDisplay = ({ cards, isLoading, setCards, toggle }) => {
   const [firstFlipDone, setFirstFlipDone] = useState(false)
   const [flippedCards, setFlippedCards] = useState([])
   const [matchedCards, setMatchedCards] = useState([])
-
-
 
   // If 2 cards are flipped check for match and flip all back over after 1.5s
   useEffect(() => {
