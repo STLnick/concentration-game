@@ -1,84 +1,63 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import api from 'api'
 
 import { Card } from './Card'
 
 import './CardsDisplay.css'
 
-export const CardsDisplay = ({ cards, flipHandler, isLoading, matchedHandler, resetHandler, toggle }) => {
-  const [firstFlipDone, setFirstFlipDone] = useState(false)
-  const [flippedCards, setFlippedCards] = useState([])
-  const [matchedCards, setMatchedCards] = useState([])
+export const CardsDisplay = ({ handler }) => {
+  const [cards, setCards] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
-  // If 2 cards are flipped check for match and flip all back over after 1.5s
+  // Fetch cards and add needed properties to each
   useEffect(() => {
-    if (flippedCards[1]) {
-      setTimeout(checkForMatch, 1000)
-    }
-  }, [flippedCards])
+    (async () => {
+      setIsLoading(true)
 
-  // Stop timer if all cards are matched
-  useEffect(() => {
-    if (cards.length !== 0 && matchedCards.length === cards.length) {
-      toggle()
-    }
-  }, [matchedCards])
+      const fetchedCards = await api.index()
 
-  // Start timer on the first card flip
-  useEffect(() => {
-    if (firstFlipDone)
-      toggle()
-  }, [firstFlipDone])
+      // Duplicate cards, shuffle Cards and assign new properties
+      const shuffledCardsWithDups = fetchedCards.concat(Array.from(fetchedCards))
+        // Assign random sort num and remove reference to original object
+        .map(card => {
+          const cardCopy = { ...card }
+          cardCopy.sortNum = Math.random()
+          return cardCopy
+        })
+        // Sort based on new sort num
+        .sort((a, b) => a.sortNum - b.sortNum)
+        // Return a 'card' without the sort num or extra images but with new properties: id, flipped, matched
+        .map(({ code, image, suit, value }, index) => ({ code, flipped: false, id: index, image, matched: false, suit, value }))
 
-  const checkForMatch = () => {
-    // If cards inside of 'flippedCards' have matching values
-    const flippedCard1 = flippedCards[0]
-    const flippedCard2 = flippedCards[1]
-    const isMatch = flippedCard1.code === flippedCard2.code
+      // Set cards state
+      setCards(shuffledCardsWithDups)
 
-    if (isMatch) {
-      // Change matched values to true
-      flippedCard1.matched = true
-      flippedCard2.matched = true
+      setIsLoading(false)
+    })()
+  }, [])
 
-      // Place 'matching cards' into 'matchedCards'
-      setMatchedCards([...matchedCards, flippedCard1, flippedCard2])
+  const flipHandler = ({ currentTarget: { dataset } }) => {
+    handler(true)
 
-      matchedHandler(flippedCard1, flippedCard2)
-
-      setTimeout(resetFlipped, 750)
-    } else {
-      setTimeout(resetFlipped, 1000)
-    }
-
-  }
-
-  const resetFlipped = () => {
-    resetHandler()
-    setFlippedCards([])
-  }
-
-  const handleFlip = ({ target }) => {
-    if (!firstFlipDone) {
-      setFirstFlipDone(true)
+    // Get the code and id from dataset
+    const { code, id } = dataset
+    // Filter out flipped cards
+    const flippedCards = cards.filter(({ flipped }) => flipped)
+    // Check if any card are flipped
+    // If no flipped cards we can find and flip card that matches dataset id (setCards)
+    if (!flippedCards.length) {
+      setCards(cards.map(card => {
+        if (card.id === id) {
+          card.flipped = true
+        }
+        return card
+      }))
     }
 
-    // If there aren't 2 cards flipped already AND the card isn't matched
-    // We know it's not matched if it doesn't have 'matched' class on button
-    // which will be the only clickable element after card is matched
-    if (!flippedCards[1] && !target.classList.contains('matched')) {
-      const flippedCard = cards.find(card => card.id === Number(target.dataset.id))
+    // As long as there are less than 2 cards and card.id is not the same
 
-      if (flippedCard.flipped) {
-        return
-      }
 
-      flippedCard.flipped = !flippedCard.flipped
-
-      flipHandler(flippedCard)
-
-      setFlippedCards(() => cards.filter(card => card.flipped))
-    }
   }
 
   const renderCards = () => {
@@ -86,7 +65,7 @@ export const CardsDisplay = ({ cards, flipHandler, isLoading, matchedHandler, re
       return <Card
         code={code}
         flipped={flipped}
-        handler={handleFlip}
+        handler={flipHandler}
         id={id}
         imgSrc={image}
         key={id}
@@ -105,10 +84,5 @@ export const CardsDisplay = ({ cards, flipHandler, isLoading, matchedHandler, re
 }
 
 CardsDisplay.propTypes = {
-  cards: PropTypes.array,
-  flipHandler: PropTypes.func,
-  isLoading: PropTypes.bool,
-  matchedHandler: PropTypes.func,
-  resetHandler: PropTypes.func,
-  toggle: PropTypes.func
+  handler: PropTypes.func
 }
