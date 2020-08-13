@@ -21,7 +21,7 @@ export const Card = ({ code, flipped, handler, id, imgSrc, matched, suit, value 
     className={matched ? 'matched' : null}
     data-code={code}
     data-id={id}
-    disabled={matched ? 'true' : null}
+    disabled={matched ? true : null}
     onClick={handler}
     style={btnStyle}>
     <img
