@@ -68,6 +68,7 @@ export const CardsDisplay = ({ handler }) => {
         card.flipped = false
         return card
       })), 1000)
+
     }
 
   }
