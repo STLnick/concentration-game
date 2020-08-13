@@ -58,10 +58,8 @@ export const CardsDisplay = ({ handler }) => {
   const flipHandler = ({ currentTarget: { dataset } }) => {
     handler(true)
 
-    // Get the code and id from dataset
     const { code, id } = dataset
 
-    // Filter out flipped cards
     const flippedCards = cards.filter(({ flipped }) => flipped)
 
     if (flippedCards.length < 2) {
@@ -72,13 +70,12 @@ export const CardsDisplay = ({ handler }) => {
       }
     }
 
-    // Reset flipped cards
     if (flippedCards[0]) {
       resetFlippedCards()
     }
 
     if (checkWinCondition()) {
-      handler(false)
+      handler(false)  // Stop Timer if won
     }
   }
 
