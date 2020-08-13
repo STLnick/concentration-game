@@ -6,7 +6,7 @@ import { Card } from './Card'
 
 import './CardsDisplay.css'
 
-export const CardsDisplay = ({ handler }) => {
+export const CardsDisplay = ({ handler, numberOfCards }) => {
   const [cards, setCards] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
@@ -15,7 +15,7 @@ export const CardsDisplay = ({ handler }) => {
     (async () => {
       setIsLoading(true)
 
-      const fetchedCards = await api.index()
+      const fetchedCards = await api.index(numberOfCards)
 
       // Duplicate cards, shuffle Cards and assign new properties
       const shuffledCardsWithDups = fetchedCards.concat(Array.from(fetchedCards))
@@ -35,7 +35,7 @@ export const CardsDisplay = ({ handler }) => {
 
       setIsLoading(false)
     })()
-  }, [])
+  }, [numberOfCards])
 
   const truthifyCards = (propToCompare, compareVal, propToChange) => {
     return cards.map(card => {
@@ -99,5 +99,6 @@ export const CardsDisplay = ({ handler }) => {
 }
 
 CardsDisplay.propTypes = {
-  handler: PropTypes.func
+  handler: PropTypes.func,
+  numberOfCards: PropTypes.number
 }
