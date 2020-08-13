@@ -37,13 +37,20 @@ export const CardsDisplay = ({ handler }) => {
     })()
   }, [])
 
-  const truthifyCards = (prop, compareVal, targetProp) => {
-    setCards(cards.map(card => {
-      if (card[prop] === compareVal) {
-        card[targetProp] = true
+  const truthifyCards = (propToCompare, compareVal, propToChange) => {
+    return cards.map(card => {
+      if (card[propToCompare] === compareVal) {
+        card[propToChange] = true
       }
       return card
-    }))
+    })
+  }
+
+  const resetFlippedCards = () => {
+    setTimeout(() => setCards(cards.map(card => {
+      card.flipped = false
+      return card
+    })), 1000)
   }
 
   const checkWinCondition = () => cards.length === cards.filter(({ matched }) => matched).length
@@ -58,20 +65,16 @@ export const CardsDisplay = ({ handler }) => {
     const flippedCards = cards.filter(({ flipped }) => flipped)
 
     if (flippedCards.length < 2) {
-      truthifyCards('id', Number(id), 'flipped')
+      setCards(truthifyCards('id', Number(id), 'flipped'))
 
       if (flippedCards[0]?.code === code) {
-        truthifyCards('code', code, 'matched')
+        setCards(truthifyCards('code', code, 'matched'))
       }
     }
 
     // Reset flipped cards
     if (flippedCards[0]) {
-      setTimeout(() => setCards(cards.map(card => {
-        card.flipped = false
-        return card
-      })), 1000)
-
+      resetFlippedCards()
     }
 
     if (checkWinCondition()) {
