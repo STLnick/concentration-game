@@ -55,10 +55,8 @@ export const CardsDisplay = ({ handler }) => {
 
   const checkWinCondition = () => cards.length === cards.filter(({ matched }) => matched).length
 
-  const flipHandler = ({ currentTarget: { dataset } }) => {
+  const flipHandler = ({ currentTarget: { dataset: { code, id } } }) => {
     handler(true)
-
-    const { code, id } = dataset
 
     const flippedCards = cards.filter(({ flipped }) => flipped)
 
