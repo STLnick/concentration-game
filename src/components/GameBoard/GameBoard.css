@@ -1,13 +1,16 @@
 .container {
+  align-items: center;
   background: linear-gradient(to bottom, #1a4a1c, #308834 600px);
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   padding-bottom: 2rem;
   width: 100vw;
 }
 
 .title {
-  color: white;
-  font-size: 3rem;
+  color: #ffffff;
+  font-size: 4rem;
   font-weight: 200;
   margin: 0;
   padding: 1rem 0;
