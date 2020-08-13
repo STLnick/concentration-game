@@ -27,8 +27,6 @@ export const Card = ({ code, flipped, handler, id, imgSrc, matched, suit, value 
     <img
       alt={`${value} of ${suit}`}
       className={animateClass}
-      data-code={code}
-      data-id={id}
       src={flipped ? imgSrc : 'https://source.unsplash.com/random/100x139'}
       style={imgStyle}
       width="100"
