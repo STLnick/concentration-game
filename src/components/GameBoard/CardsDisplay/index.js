@@ -63,6 +63,12 @@ export const CardsDisplay = ({ handler }) => {
       }
     }
 
+    if (flippedCards[0]) {
+      setTimeout(() => setCards(cards.map(card => {
+        card.flipped = false
+        return card
+      })), 1000)
+    }
 
   }
 
