@@ -37,25 +37,27 @@ export const CardsDisplay = ({ handler }) => {
     })()
   }, [])
 
+  const truthifyCards = (prop, compareVal, targetProp) => {
+    setCards(cards.map(card => {
+      if (card[prop] === Number(compareVal)) {
+        card[targetProp] = true
+      }
+      return card
+    }))
+  }
+
   const flipHandler = ({ currentTarget: { dataset } }) => {
     handler(true)
 
     // Get the code and id from dataset
     const { code, id } = dataset
+
     // Filter out flipped cards
     const flippedCards = cards.filter(({ flipped }) => flipped)
-    // Check if any card are flipped
-    // If no flipped cards we can find and flip card that matches dataset id (setCards)
-    if (!flippedCards.length) {
-      setCards(cards.map(card => {
-        if (card.id === id) {
-          card.flipped = true
-        }
-        return card
-      }))
-    }
 
-    // As long as there are less than 2 cards and card.id is not the same
+    if (flippedCards.length < 2) {
+      truthifyCards('id', id, 'flipped')
+    }
 
 
   }
