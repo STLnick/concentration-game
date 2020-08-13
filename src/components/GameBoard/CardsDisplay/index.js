@@ -53,27 +53,25 @@ export const CardsDisplay = ({ handler }) => {
     })), 1000)
   }
 
-  const checkWinCondition = () => cards.length === cards.filter(({ matched }) => matched).length
-
   const flipHandler = ({ currentTarget: { dataset: { code, id } } }) => {
     handler(true)
 
-    const flippedCards = cards.filter(({ flipped }) => flipped)
+    const flippedCards = cards.filter(({ flipped, matched }) => flipped && !matched)
 
-    if (flippedCards.length < 2) {
+    console.log(flippedCards)
+
+    if (flippedCards.length < 2 && flippedCards[0]?.id !== Number(id)) {
       setCards(truthifyCards('id', Number(id), 'flipped'))
 
       if (flippedCards[0]?.code === code) {
         setCards(truthifyCards('code', code, 'matched'))
+
+        if (!cards.find(({ matched }) => !matched)) {
+          handler(false)
+        }
+      } else if (flippedCards[0]) {
+        resetFlippedCards()
       }
-    }
-
-    if (flippedCards[0]) {
-      resetFlippedCards()
-    }
-
-    if (checkWinCondition()) {
-      handler(false)  // Stop Timer if won
     }
   }
 
