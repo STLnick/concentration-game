@@ -39,7 +39,7 @@ export const CardsDisplay = ({ handler }) => {
 
   const truthifyCards = (prop, compareVal, targetProp) => {
     setCards(cards.map(card => {
-      if (card[prop] === Number(compareVal)) {
+      if (card[prop] === compareVal) {
         card[targetProp] = true
       }
       return card
@@ -56,7 +56,11 @@ export const CardsDisplay = ({ handler }) => {
     const flippedCards = cards.filter(({ flipped }) => flipped)
 
     if (flippedCards.length < 2) {
-      truthifyCards('id', id, 'flipped')
+      truthifyCards('id', Number(id), 'flipped')
+
+      if (flippedCards[0]?.code === code) {
+        truthifyCards('code', code, 'matched')
+      }
     }
 
 
