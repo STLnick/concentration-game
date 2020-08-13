@@ -26,7 +26,7 @@ export const GameBoard = () => {
       <h3 className="title">Concentration</h3>
       <form onSubmit={handleSubmit}>
         <label htmlFor="num-cards">Number of Pairs to Play With</label>
-        <input id="num-cards" type="number" />
+        <input id="num-cards" min="2" type="number" />
         <button type="submit">Deal</button>
       </form>
       <Timer toggle={timerIsRunning} />
