@@ -8,7 +8,7 @@ export default {
     const deck = await deckRes.json()
 
     // Changed count=12 to count=4 just to test all matched condition
-    const cardsRes = await fetch(`https://deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=12`)
+    const cardsRes = await fetch(`https://deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=2`)
     const cards = await cardsRes.json()
 
     return cards.cards
