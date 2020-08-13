@@ -46,6 +46,8 @@ export const CardsDisplay = ({ handler }) => {
     }))
   }
 
+  const checkWinCondition = () => cards.length === cards.filter(({ matched }) => matched).length
+
   const flipHandler = ({ currentTarget: { dataset } }) => {
     handler(true)
 
@@ -63,6 +65,7 @@ export const CardsDisplay = ({ handler }) => {
       }
     }
 
+    // Reset flipped cards
     if (flippedCards[0]) {
       setTimeout(() => setCards(cards.map(card => {
         card.flipped = false
@@ -71,6 +74,9 @@ export const CardsDisplay = ({ handler }) => {
 
     }
 
+    if (checkWinCondition()) {
+      handler(false)
+    }
   }
 
   const renderCards = () => {
