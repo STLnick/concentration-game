@@ -23,9 +23,16 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  height: 10rem;
+  height: 7rem;
   justify-content: space-evenly;
   width: 22rem;
+}
+
+.input-button-wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .game-won-form {

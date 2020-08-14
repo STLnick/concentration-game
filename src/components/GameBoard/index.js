@@ -26,8 +26,10 @@ export const GameBoard = () => {
       <h3 className="title">Concentration</h3>
       <div className="input-container">
         <label htmlFor="num-cards">Number of Pairs to Play With</label>
-        <input id="num-cards" min="2" step="2" type="number" />
-        <button onClick={handleClick}>Deal</button>
+        <div className="input-button-wrapper">
+          <input id="num-cards" min="2" step="2" type="number" />
+          <button onClick={handleClick}>Deal</button>
+        </div>
       </div>
       <Timer toggle={timerIsRunning} />
       <CardsDisplay resetHandler={handleReset} timerHandler={handleTimer} numberOfCards={numCards} />
