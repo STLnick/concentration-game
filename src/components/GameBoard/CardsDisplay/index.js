@@ -15,6 +15,11 @@ export const CardsDisplay = ({ handler, numberOfCards }) => {
     (async () => {
       setIsLoading(true)
 
+      // If game won message is present remove it
+      if (document.querySelector('.game-notification').classList.contains('game-won')) {
+        document.querySelector('.game-notification').classList.remove('game-won')
+      }
+
       const fetchedCards = await api.index(numberOfCards)
 
       // Duplicate cards, shuffle Cards and assign new properties
