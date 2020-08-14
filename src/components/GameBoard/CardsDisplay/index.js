@@ -6,7 +6,7 @@ import { Card } from './Card'
 
 import './CardsDisplay.css'
 
-export const CardsDisplay = ({ handler, numberOfCards }) => {
+export const CardsDisplay = ({ timerHandler, numberOfCards }) => {
   const [cards, setCards] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
@@ -59,7 +59,7 @@ export const CardsDisplay = ({ handler, numberOfCards }) => {
   }
 
   const flipHandler = ({ currentTarget: { dataset: { code, id } } }) => {
-    handler(true)
+    timerHandler(true)
 
     const flippedCards = cards.filter(({ flipped, matched }) => flipped && !matched)
 
@@ -70,7 +70,7 @@ export const CardsDisplay = ({ handler, numberOfCards }) => {
         setCards(truthifyCards('code', code, 'matched'))
 
         if (!cards.find(({ matched }) => !matched)) {
-          handler(false)
+          timerHandler(false)
           // Show notification that game is over
           document.querySelector('.game-notification').classList.add('game-won')
           // Show form for user to enter name
@@ -115,6 +115,6 @@ export const CardsDisplay = ({ handler, numberOfCards }) => {
 }
 
 CardsDisplay.propTypes = {
-  handler: PropTypes.func,
+  timerHandler: PropTypes.func,
   numberOfCards: PropTypes.number
 }
