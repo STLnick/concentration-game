@@ -35,10 +35,11 @@ export const Card = ({ code, flipped, handler, id, imgSrc, matched, suit, value 
 }
 
 Card.propTypes = {
+  code: PropTypes.string,
   flipped: PropTypes.bool,
   handler: PropTypes.func,
+  id: PropTypes.number,
   imgSrc: PropTypes.string,
-  index: PropTypes.number,
   matched: PropTypes.bool,
   suit: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired

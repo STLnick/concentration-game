@@ -17,6 +17,23 @@
   text-align: center;
 }
 
+.game-notification {
+  background-color: var(--primary-green);
+  box-shadow: 0 0 3px 3px white;
+  color: white;
+  display: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 1rem 0;
+  text-align: center;
+  text-shadow: 5px 5px 3px var(--primary-green-dark);
+  text-transform: uppercase;
+}
+
+.game-won {
+  display: block;
+}
+
 @keyframes flipOutX {
   from {
     transform: perspective(400px);
