@@ -16,3 +16,14 @@
   padding: 1rem 0;
   text-align: center;
 }
+
+.input-container {
+  align-items: center;
+  border: 2px solid var(--primary-green);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 10rem;
+  justify-content: space-evenly;
+  width: 22rem;
+}

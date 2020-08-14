@@ -13,17 +13,6 @@ body {
   padding: 0;
 }
 
-form {
-  align-items: center;
-  border: 2px solid var(--primary-green);
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  height: 10rem;
-  justify-content: space-evenly;
-  width: 22rem;
-}
-
 form label {
   color: white;
   font-size: 1.25rem;
@@ -47,4 +36,10 @@ button {
   font-weight: 500;
   padding: 0.75rem 3rem;
   text-transform: uppercase;
+  transition: box-shadow 0.4s;
+}
+
+button:focus,
+button:hover {
+  box-shadow: 0 0 3px 3px white;
 }

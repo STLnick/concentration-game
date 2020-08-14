@@ -14,21 +14,17 @@ export const GameBoard = () => {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-
-    if (e.target.querySelector('input').value % 2 === 0) {
-      setNumCards(parseInt(e.target.querySelector('input').value))
-    }
+    setNumCards(parseInt(document.querySelector('input').value))
   }
 
   return (
     <div className="container">
       <h3 className="title">Concentration</h3>
-      <form onSubmit={handleSubmit}>
+      <div className="input-container">
         <label htmlFor="num-cards">Number of Pairs to Play With</label>
-        <input id="num-cards" min="2" type="number" />
-        <button type="submit">Deal</button>
-      </form>
+        <input id="num-cards" min="2" step="2" type="number" />
+        <button onClick={handleSubmit}>Deal</button>
+      </div>
       <Timer toggle={timerIsRunning} />
       <CardsDisplay handler={handleCards} numberOfCards={numCards} />
     </div>
