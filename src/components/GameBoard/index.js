@@ -13,9 +13,11 @@ export const GameBoard = () => {
     setTimerIsRunning(toggle)
   }
 
-  const handleSubmit = (e) => {
+  const handleClick = () => {
     setNumCards(parseInt(document.querySelector('input').value))
   }
+
+  //handle submit needed...
 
   return (
     <div className="container">
@@ -23,7 +25,7 @@ export const GameBoard = () => {
       <div className="input-container">
         <label htmlFor="num-cards">Number of Pairs to Play With</label>
         <input id="num-cards" min="2" step="2" type="number" />
-        <button onClick={handleSubmit}>Deal</button>
+        <button onClick={handleClick}>Deal</button>
       </div>
       <Timer toggle={timerIsRunning} />
       <CardsDisplay handler={handleCards} numberOfCards={numCards} />
