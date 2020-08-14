@@ -86,18 +86,18 @@ export const CardsDisplay = ({ resetHandler, timerHandler, numberOfCards }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    document.querySelector('form').classList.remove('game-won-form')
     const userInfo = document.querySelector('.user-info')
-    // Put info inside user-info div
     const name = e.target.querySelector('input').value
     const time = document.querySelector('.timer').textContent
-    console.log(name, time)
+
+    // Hide form
+    document.querySelector('form').classList.remove('game-won-form')
+
+    // Put info inside user-info div
     userInfo.innerHTML += `<div class="user">
       <h3>${name}</h3>  ---  <h3>${time}</h3>
     </div>`
     userInfo.classList.add('active-user-info')
-    // Hide form
-
   }
 
   const renderCards = () => {
