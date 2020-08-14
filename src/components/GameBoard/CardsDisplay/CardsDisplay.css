@@ -34,6 +34,33 @@
   display: block;
 }
 
+.user-info {
+  align-items: center;
+  color: white;
+  display: none;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.user-info h5 {
+  margin: 0.5rem 0;
+}
+
+.active-user-info {
+  display: flex;
+}
+
+.user {
+  align-items: center;
+  border-bottom: 2px solid var(--primary-green-dark);
+  display: flex;
+  padding: 0.5rem 0 0.05rem 0;
+}
+
+.user h3 {
+  margin: 0;
+}
+
 @keyframes flipOutX {
   from {
     transform: perspective(400px);
