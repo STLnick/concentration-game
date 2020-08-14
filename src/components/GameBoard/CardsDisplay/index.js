@@ -58,8 +58,6 @@ export const CardsDisplay = ({ handler, numberOfCards }) => {
 
     const flippedCards = cards.filter(({ flipped, matched }) => flipped && !matched)
 
-    console.log(flippedCards)
-
     if (flippedCards.length < 2 && flippedCards[0]?.id !== Number(id)) {
       setCards(truthifyCards('id', Number(id), 'flipped'))
 
@@ -68,6 +66,8 @@ export const CardsDisplay = ({ handler, numberOfCards }) => {
 
         if (!cards.find(({ matched }) => !matched)) {
           handler(false)
+          // Set notification that game is over
+          document.querySelector('.game-notification').classList.add('game-won')
         }
       } else if (flippedCards[0]) {
         resetFlippedCards()
@@ -92,8 +92,11 @@ export const CardsDisplay = ({ handler, numberOfCards }) => {
   }
 
   return (
-    <div className="cards">
-      {isLoading ? <h4 className="loading-msg">Loading Cards...</h4> : renderCards()}
+    <div>
+      <div className="game-notification">You Win!</div>
+      <div className="cards">
+        {isLoading ? <h4 className="loading-msg">Loading Cards...</h4> : renderCards()}
+      </div>
     </div>
   )
 }
