@@ -17,6 +17,10 @@ export const GameBoard = () => {
     setNumCards(parseInt(document.querySelector('input').value))
   }
 
+  const handleReset = () => {
+    setNumCards(0)
+  }
+
   return (
     <div className="container">
       <h3 className="title">Concentration</h3>
@@ -26,7 +30,7 @@ export const GameBoard = () => {
         <button onClick={handleClick}>Deal</button>
       </div>
       <Timer toggle={timerIsRunning} />
-      <CardsDisplay timerHandler={handleTimer} numberOfCards={numCards} />
+      <CardsDisplay resetHandler={handleReset} timerHandler={handleTimer} numberOfCards={numCards} />
     </div>
   )
 }

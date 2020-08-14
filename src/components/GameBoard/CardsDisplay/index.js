@@ -6,7 +6,7 @@ import { Card } from './Card'
 
 import './CardsDisplay.css'
 
-export const CardsDisplay = ({ timerHandler, numberOfCards }) => {
+export const CardsDisplay = ({ resetHandler, timerHandler, numberOfCards }) => {
   const [cards, setCards] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
@@ -75,6 +75,8 @@ export const CardsDisplay = ({ timerHandler, numberOfCards }) => {
           document.querySelector('.game-notification').classList.add('game-won')
           // Show form for user to enter name
           document.querySelector('form').classList.add('game-won-form')
+          // Set Number of Cards to 0: allows user to play again with same number of pairs
+          resetHandler()
         }
       } else if (flippedCards[0]) {
         resetFlippedCards()
@@ -99,19 +101,21 @@ export const CardsDisplay = ({ timerHandler, numberOfCards }) => {
   }
 
   const renderCards = () => {
-    return cards.map(({ code, flipped, id, image, matched, suit, value }) => {
-      return <Card
-        code={code}
-        flipped={flipped}
-        handler={flipHandler}
-        id={id}
-        imgSrc={image}
-        key={id}
-        matched={matched}
-        suit={suit}
-        value={value}
-      />
-    })
+    if (cards[0]) {
+      return cards.map(({ code, flipped, id, image, matched, suit, value }) => {
+        return <Card
+          code={code}
+          flipped={flipped}
+          handler={flipHandler}
+          id={id}
+          imgSrc={image}
+          key={id}
+          matched={matched}
+          suit={suit}
+          value={value}
+        />
+      })
+    }
   }
 
   return (
@@ -133,6 +137,7 @@ export const CardsDisplay = ({ timerHandler, numberOfCards }) => {
 }
 
 CardsDisplay.propTypes = {
-  timerHandler: PropTypes.func,
-  numberOfCards: PropTypes.number
+  numberOfCards: PropTypes.number,
+  resetHandler: PropTypes.func,
+  timerHandler: PropTypes.func
 }
