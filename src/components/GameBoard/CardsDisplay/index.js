@@ -71,8 +71,10 @@ export const CardsDisplay = ({ handler, numberOfCards }) => {
 
         if (!cards.find(({ matched }) => !matched)) {
           handler(false)
-          // Set notification that game is over
+          // Show notification that game is over
           document.querySelector('.game-notification').classList.add('game-won')
+          // Show form for user to enter name
+          document.querySelector('form').classList.add('game-won-form')
         }
       } else if (flippedCards[0]) {
         resetFlippedCards()
@@ -99,6 +101,12 @@ export const CardsDisplay = ({ handler, numberOfCards }) => {
   return (
     <div>
       <div className="game-notification">You Win!</div>
+      <div className="user-info"></div>
+      <form>
+        <label htmlFor="user-name">Enter Your Name</label>
+        <input id="user-name" placeholder="Bobby Boucher" type="text" />
+        <button type="submit">Submit</button>
+      </form>
       <div className="cards">
         {isLoading ? <h4 className="loading-msg">Loading Cards...</h4> : renderCards()}
       </div>

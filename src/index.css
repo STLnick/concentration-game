@@ -13,7 +13,19 @@ body {
   padding: 0;
 }
 
-form label {
+form {
+  align-items: center;
+  border: 2px solid var(--primary-green-dark);
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  height: 10rem;
+  justify-content: space-evenly;
+  margin: 0.5rem auto;
+  width: 22rem;
+}
+
+label {
   color: white;
   font-size: 1.25rem;
   font-weight: 700;
@@ -22,9 +34,13 @@ form label {
 input {
   border-radius: 5px;
   font-size: 1.25rem;
-  padding: 0.5rem 2rem;
+  padding: 0.25rem 2rem;
   text-align: center;
   width: 5rem;
+}
+
+form input {
+  width: 10rem;
 }
 
 button {
@@ -34,7 +50,7 @@ button {
   color: #fff;
   font-size: 1rem;
   font-weight: 500;
-  padding: 0.75rem 3rem;
+  padding: 0.5rem 2.25rem;
   text-transform: uppercase;
   transition: box-shadow 0.4s;
 }

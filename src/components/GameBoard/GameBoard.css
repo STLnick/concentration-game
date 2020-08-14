@@ -27,3 +27,7 @@
   justify-content: space-evenly;
   width: 22rem;
 }
+
+.game-won-form {
+  display: flex;
+}
