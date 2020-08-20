@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
-import { HighScores } from './HighScores'
+import { HighScores } from '../HighScores'
 
 export const Welcome = () => {
 
