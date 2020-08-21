@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import api from 'api'
 
@@ -9,6 +10,7 @@ import './CardsDisplay.css'
 export const CardsDisplay = ({ timerHandler, numberOfCards }) => {
   const [cards, setCards] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const history = useHistory()
 
   // Fetch cards and add needed properties to each
   useEffect(() => {
@@ -66,10 +68,7 @@ export const CardsDisplay = ({ timerHandler, numberOfCards }) => {
 
         if (!cards.find(({ matched }) => !matched)) {
           timerHandler(false)
-          // Show notification that game is over
-          document.querySelector('.game-notification').classList.add('game-won')
-          // Show form for user to enter name
-          document.querySelector('form').classList.add('game-won-form')
+          history.push('/gameover')
         }
       } else if (flippedCards[0]) {
         resetFlippedCards()
