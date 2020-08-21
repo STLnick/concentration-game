@@ -39,7 +39,7 @@ export const App = () => {
     e.preventDefault()
 
     // Get user name
-    const name = e.target.querySelector('input').value
+    const name = e.target.querySelector('#user-name').value
 
     // TODO: Get user time
 
@@ -47,6 +47,8 @@ export const App = () => {
     setScores(prevScores => {
       return [...prevScores, { initials: name, time: '1:00' }]
     })
+
+    document.querySelector('#form-btn').disabled = true;
   }
 
   return (
