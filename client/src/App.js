@@ -6,7 +6,7 @@ import {
   Switch
 } from 'react-router-dom'
 
-import { GameBoard, HowToPlay, Welcome } from './components'
+import { GameBoard, GameOver, HowToPlay, Welcome } from './components'
 
 import './App.css';
 
@@ -16,6 +16,9 @@ export const App = () => {
       <Switch>
         <Route path="/game">
           <GameBoard />
+        </Route>
+        <Route path="/gameover">
+          <GameOver />
         </Route>
         <Route path="/howtoplay">
           <HowToPlay />
