@@ -1,17 +1,13 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
 import { CardsDisplay } from './CardsDisplay'
 import { Timer } from './Timer'
 
 import './GameBoard.css'
 
-export const GameBoard = () => {
+export const GameBoard = ({ time, toggle }) => {
   const [numCards, setNumCards] = useState(0)
-  const [timerIsRunning, setTimerIsRunning] = useState(false)
-
-  const handleTimer = (toggle) => {
-    setTimerIsRunning(toggle)
-  }
 
   const handleClick = () => {
     setNumCards(parseInt(document.querySelector('input').value))
@@ -25,8 +21,13 @@ export const GameBoard = () => {
         <input id="num-cards" min="2" step="2" type="number" />
         <button onClick={handleClick}>Deal</button>
       </div>
-      <Timer toggle={timerIsRunning} />
-      <CardsDisplay timerHandler={handleTimer} numberOfCards={numCards} />
+      <Timer time={time} toggle={toggle} />
+      <CardsDisplay timerHandler={toggle} numberOfCards={numCards} />
     </div>
   )
+}
+
+GameBoard.propTypes = {
+  time: PropTypes.number.isRequired,
+  toggle: PropTypes.func
 }

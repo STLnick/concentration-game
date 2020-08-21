@@ -6,9 +6,9 @@ import './HighScores.css'
 export const HighScores = ({ scores }) => {
 
   const renderTableRows = () => {
-    return scores.map(({ initials, time }) => {
+    return scores.map(({ initials, time }, i) => {
       return (
-        <tr>
+        <tr key={i}>
           <td>{initials}</td>
           <td>{time}</td>
         </tr>

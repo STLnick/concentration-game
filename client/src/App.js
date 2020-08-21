@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Link,
@@ -16,6 +16,24 @@ export const App = () => {
     { initials: 'AK', time: '0:30' },
     { initials: 'MM', time: '0:35' },
   ])
+  const [time, setTime] = useState(0)
+  const [timerIsRunning, setTimerIsRunning] = useState(false)
+
+  const handleTimerIsRunning = (toggle) => {
+    setTimerIsRunning(toggle)
+  }
+
+  useEffect(() => {
+    while (timerIsRunning) {
+      const intervalID = setInterval(() => {
+        setTime(() => time + 1)
+      }, 1000)
+      // Cleanup function
+      return () => {
+        clearInterval(intervalID)
+      }
+    }
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -35,7 +53,7 @@ export const App = () => {
     <Router>
       <Switch>
         <Route path="/game">
-          <GameBoard />
+          <GameBoard time={time} toggle={handleTimerIsRunning} />
         </Route>
         <Route path="/gameover">
           <GameOver handler={handleSubmit} scores={scores} />
