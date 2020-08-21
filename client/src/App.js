@@ -14,6 +14,7 @@ import './App.css';
 const scoresRepo = api('scores')
 
 export const App = () => {
+  const [numPairs, setNumPairs] = useState(0)
   const [scores, setScores] = useState([])
   const [time, setTime] = useState(0)
   const [timerIsRunning, setTimerIsRunning] = useState(false)
@@ -41,6 +42,10 @@ export const App = () => {
     }
   })
 
+  const handleClick = () => {
+    setNumPairs(parseInt(document.querySelector('input').value))
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -48,7 +53,11 @@ export const App = () => {
     const name = e.target.querySelector('#user-name').value
 
     // Create new score object
-    const newScore = { initials: name, time: utils.secondsToMinutesAndSeconds(time) }
+    const newScore = {
+      initials: name,
+      pairs: numPairs,
+      time: utils.secondsToMinutesAndSeconds(time)
+    }
 
     // Update state with new score
     setScores(prevScores => {
@@ -64,7 +73,12 @@ export const App = () => {
     <Router>
       <Switch>
         <Route path="/game">
-          <GameBoard time={time} toggle={handleTimerIsRunning} />
+          <GameBoard
+            clickHandler={handleClick}
+            numCards={numPairs}
+            time={time}
+            toggle={handleTimerIsRunning}
+          />
         </Route>
         <Route path="/gameover">
           <GameOver handler={handleSubmit} scores={scores} />

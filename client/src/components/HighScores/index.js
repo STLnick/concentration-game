@@ -6,10 +6,11 @@ import './HighScores.css'
 export const HighScores = ({ scores }) => {
 
   const renderTableRows = () => {
-    return scores.map(({ initials, time }, i) => {
+    return scores.map(({ initials, pairs, time }, i) => {
       return (
         <tr key={i}>
           <td>{initials}</td>
+          <td>{pairs}</td>
           <td>{time}</td>
         </tr>
       )
@@ -22,6 +23,7 @@ export const HighScores = ({ scores }) => {
       <thead>
         <tr>
           <th>Initials</th>
+          <th>Pairs</th>
           <th>Time</th>
         </tr>
       </thead>

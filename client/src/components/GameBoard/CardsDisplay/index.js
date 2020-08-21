@@ -70,7 +70,6 @@ export const CardsDisplay = ({ timerHandler, numberOfCards }) => {
 
         if (!cards.find(({ matched }) => !matched)) {
           timerHandler(false)
-          const time = document.querySelector('.timer').textContent
           history.push('/gameover')
         }
       } else if (flippedCards[0]) {
