@@ -12,6 +12,8 @@ import { GameBoard, GameOver, HowToPlay, Welcome } from './components'
 
 import './App.css';
 
+const scoresRepo = api('scores')
+
 export const App = () => {
   const [scores, setScores] = useState([])
   const [time, setTime] = useState(0)
@@ -20,7 +22,7 @@ export const App = () => {
   // Get scores in database
   useEffect(() => {
     (async () => {
-      setScores(await api.getScores())
+      setScores(await scoresRepo.getScores())
     })()
   }, [])
 
@@ -56,7 +58,7 @@ export const App = () => {
 
     document.querySelector('#form-btn').disabled = true;
 
-    const res = await api.addScore(newScore)
+    const res = await scoresRepo.addScore(newScore)
   }
 
   return (

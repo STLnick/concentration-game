@@ -7,6 +7,8 @@ import { Card } from './Card'
 
 import './CardsDisplay.css'
 
+const cardsRepo = api('cards')
+
 export const CardsDisplay = ({ timerHandler, numberOfCards }) => {
   const [cards, setCards] = useState([])
   const [isLoading, setIsLoading] = useState(false)
@@ -17,7 +19,7 @@ export const CardsDisplay = ({ timerHandler, numberOfCards }) => {
     (async () => {
       setIsLoading(true)
 
-      const fetchedCards = await api.index(numberOfCards)
+      const fetchedCards = await cardsRepo.index(numberOfCards)
 
       // Duplicate cards, shuffle Cards and assign new properties
       const shuffledCardsWithDups = fetchedCards.concat(Array.from(fetchedCards))
