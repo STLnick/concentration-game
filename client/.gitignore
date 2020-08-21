@@ -5,9 +5,6 @@
 /.pnp
 .pnp.js
 
-# Created by 'webpack'
-/dist
-
 # testing
 /coverage
 
