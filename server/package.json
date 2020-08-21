@@ -1,58 +1,33 @@
 {
-  "name": "claim-react-student-starter",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
-  },
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "MEN",
+  "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "dep": "depcruise --max-depth 2 --exclude 'node_modules' --output-type dot src | dot -T svg | tee dependencygraph.svg | depcruise-wrap-stream-in-html > index.html && browser-sync start --server --files './index.html'"
+    "build": "webpack",
+    "start-server": "nodemon dist/main.js",
+    "watch": "webpack --watch"
   },
-  "eslintConfig": {
-    "env": {
-      "browser": true
-    },
-    "extends": [
-      "eslint:recommended",
-      "plugin:react/recommended",
-      "plugin:jsx-a11y/recommended",
-      "plugin:react-hooks/recommended",
-      "prettier",
-      "prettier/react"
-    ],
-    "plugins": [
-      "jsx-a11y"
-    ],
-    "rules": {
-      "react/jsx-uses-react": "error",
-      "react/jsx-uses-vars": "error"
-    },
-    "parser": "babel-eslint"
-  },
-  "browserslist": {
-    "production": [
-      "defaults",
-      "not IE 11",
-      "not IE_Mob 11",
-      "maintained node versions"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "keywords": [
+    "MongoDB",
+    "Express",
+    "Node"
+  ],
+  "author": "Nick Ray",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "got": "^11.5.2",
+    "mongodb": "^3.5.9"
   },
   "devDependencies": {
-    "browser-sync": "^2.26.12",
-    "dependency-cruiser": "^9.9.2",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react": "^7.20.3",
-    "eslint-plugin-react-hooks": "^4.0.8",
-    "prettier": "^2.0.5"
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "nodemon": "^2.0.4",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
   }
 }
