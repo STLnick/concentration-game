@@ -1,0 +1,67 @@
+@import-normalize; /* bring in normalize.css styles */
+
+:root {
+  --primary-green: #308834;
+  --primary-green-dark: #1a4a1c;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+}
+
+form {
+  align-items: center;
+  border: 2px solid var(--primary-green-dark);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 10rem;
+  justify-content: space-evenly;
+  margin: 0.5rem auto;
+  width: 22rem;
+}
+
+label {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+input {
+  border-radius: 5px;
+  font-size: 1.25rem;
+  padding: 0.25rem 2rem;
+  text-align: center;
+  width: 5rem;
+}
+
+form input {
+  width: 10rem;
+}
+
+button {
+  background-color: var(--primary-green-dark);
+  border: 2px solid #fff;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 2.25rem;
+  text-transform: uppercase;
+  transition: box-shadow 0.4s;
+}
+
+button:focus,
+button:hover {
+  box-shadow: 0 0 3px 3px white;
+}
+
+button:disabled {
+  background-color: #eee;
+  box-shadow: none;
+  color: #616161;
+}
