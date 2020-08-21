@@ -5,6 +5,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
+import utils from 'utils'
 
 import { GameBoard, GameOver, HowToPlay, Welcome } from './components'
 
@@ -45,7 +46,7 @@ export const App = () => {
 
     // TODO: Update state with initials and time
     setScores(prevScores => {
-      return [...prevScores, { initials: name, time: '1:00' }]
+      return [...prevScores, { initials: name, time: utils.secondsToMinutesAndSeconds(time) }]
     })
 
     document.querySelector('#form-btn').disabled = true;
