@@ -1,13 +1,9 @@
-import React, { Fragment, useState } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 import './HighScores.css'
 
-export const HighScores = () => {
-  const [scores, setScores] = useState([
-    { initials: 'NR', time: '0:40' },
-    { initials: 'AK', time: '0:30' },
-    { initials: 'MM', time: '0:35' },
-  ])
+export const HighScores = ({ scores }) => {
 
   const renderTableRows = () => {
     return scores.map(({ initials, time }) => {
@@ -21,19 +17,21 @@ export const HighScores = () => {
   }
 
   return (
-    <Fragment>
-      <table>
-        <caption>High Scores</caption>
-        <thead>
-          <tr>
-            <th>Initials</th>
-            <th>Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          {renderTableRows()}
-        </tbody>
-      </table>
-    </Fragment>
+    <table>
+      <caption>High Scores</caption>
+      <thead>
+        <tr>
+          <th>Initials</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {renderTableRows()}
+      </tbody>
+    </table>
   )
+}
+
+HighScores.propTypes = {
+  scores: PropTypes.array
 }

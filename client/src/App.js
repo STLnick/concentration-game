@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Link,
@@ -11,6 +11,26 @@ import { GameBoard, GameOver, HowToPlay, Welcome } from './components'
 import './App.css';
 
 export const App = () => {
+  const [scores, setScores] = useState([
+    { initials: 'NR', time: '0:40' },
+    { initials: 'AK', time: '0:30' },
+    { initials: 'MM', time: '0:35' },
+  ])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    // Get user name
+    const name = e.target.querySelector('input').value
+
+    // TODO: Get user time
+
+    // TODO: Update state with initials and time
+    setScores(prevScores => {
+      return [...prevScores, { initials: name, time: '1:00' }]
+    })
+  }
+
   return (
     <Router>
       <Switch>
@@ -18,13 +38,13 @@ export const App = () => {
           <GameBoard />
         </Route>
         <Route path="/gameover">
-          <GameOver />
+          <GameOver handler={handleSubmit} scores={scores} />
         </Route>
         <Route path="/howtoplay">
           <HowToPlay />
         </Route>
         <Route exact path="/">
-          <Welcome />
+          <Welcome scores={scores} />
         </Route>
       </Switch>
     </Router>

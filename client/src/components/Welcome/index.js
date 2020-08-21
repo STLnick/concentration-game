@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom'
 
 import { HighScores } from '../HighScores'
 
-export const Welcome = () => {
+export const Welcome = ({ scores }) => {
 
   const history = useHistory('/howtoplay')
 
@@ -15,7 +15,7 @@ export const Welcome = () => {
         {/* link to instructions */}
       </div>
       <div>
-        <HighScores />
+        <HighScores scores={scores} />
       </div>
       <Link className="link" to="/howtoplay">How To Play</Link>
       <Link className="link" to="/game">Start the Game</Link>
