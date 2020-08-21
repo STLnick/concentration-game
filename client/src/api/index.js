@@ -1,8 +1,5 @@
 export default (purpose) => purpose === 'cards' ? ({
   async index(numOfCards) {
-    // const deckRes = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
-    // const deck = await deckRes.json()
-
     // Testing 'All Matched condition'
     const deckRes = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
     const deck = await deckRes.json()

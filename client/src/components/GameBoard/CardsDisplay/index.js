@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { StyleRoot } from 'radium';
 
 import api from 'api'
-import { animations } from 'utils'
 
 import { Card } from './Card'
 
