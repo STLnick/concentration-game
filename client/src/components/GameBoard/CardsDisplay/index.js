@@ -15,11 +15,6 @@ export const CardsDisplay = ({ timerHandler, numberOfCards }) => {
     (async () => {
       setIsLoading(true)
 
-      // If game won message is present remove it
-      if (document.querySelector('.game-notification').classList.contains('game-won')) {
-        document.querySelector('.game-notification').classList.remove('game-won')
-      }
-
       const fetchedCards = await api.index(numberOfCards)
 
       // Duplicate cards, shuffle Cards and assign new properties
@@ -82,22 +77,6 @@ export const CardsDisplay = ({ timerHandler, numberOfCards }) => {
     }
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    document.querySelector('form').classList.remove('game-won-form')
-    const userInfo = document.querySelector('.user-info')
-    // Put info inside user-info div
-    const name = e.target.querySelector('input').value
-    const time = document.querySelector('.timer').textContent
-    console.log(name, time)
-    userInfo.innerHTML += `<div class="user">
-      <h3>${name}</h3>  ---  <h3>${time}</h3>
-    </div>`
-    userInfo.classList.add('active-user-info')
-    // Hide form
-
-  }
-
   const renderCards = () => {
     return cards.map(({ code, flipped, id, image, matched, suit, value }) => {
       return <Card
@@ -115,19 +94,8 @@ export const CardsDisplay = ({ timerHandler, numberOfCards }) => {
   }
 
   return (
-    <div>
-      <div className="game-notification">You Win!</div>
-      <div className="user-info">
-        <h5>Recent Scores</h5>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="user-name">Enter Your Name</label>
-        <input id="user-name" placeholder="Bobby Boucher" type="text" />
-        <button type="submit">Submit</button>
-      </form>
-      <div className="cards">
-        {isLoading ? <h4 className="loading-msg">Loading Cards...</h4> : renderCards()}
-      </div>
+    <div className="cards">
+      {isLoading ? <h4 className="loading-msg">Loading Cards...</h4> : renderCards()}
     </div>
   )
 }
