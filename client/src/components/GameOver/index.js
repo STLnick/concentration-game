@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import { HighScores } from '../HighScores'
 
 export const GameOver = ({ handler, scores }) => {
-
   return (
     <div className="container">
       <h2>Game Over</h2>
