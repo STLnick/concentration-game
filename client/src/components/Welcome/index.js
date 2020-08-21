@@ -1,13 +1,9 @@
 import React from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { HighScores } from '../HighScores'
 
 export const Welcome = ({ scores }) => {
-
-  const history = useHistory('/howtoplay')
-
-
   return (
     <div className="container welcome-container">
       <h1 className="welcome">Welcome to Concentration!</h1>
