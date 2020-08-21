@@ -10,7 +10,7 @@ export const GameOver = ({ handler, scores }) => {
     <div className="container">
       <h2>Game Over</h2>
       <form onSubmit={handler}>
-        <label htmlFor="user-name">Enter Your Name</label>
+        <label htmlFor="user-name">Enter Your Initials</label>
         <input id="user-name" placeholder="Bobby Boucher" type="text" />
         <button id="form-btn" type="submit">Submit</button>
       </form>
