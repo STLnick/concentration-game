@@ -5,7 +5,7 @@ import {
   Switch
 } from 'react-router-dom'
 import api from 'api'
-import utils from 'utils'
+import { secondsToMinutesAndSeconds } from 'utils'
 
 import { GameBoard, GameOver, HowToPlay, Welcome } from './components'
 
@@ -56,7 +56,7 @@ export const App = () => {
     const newScore = {
       initials: name,
       pairs: numPairs,
-      time: utils.secondsToMinutesAndSeconds(time)
+      time: secondsToMinutesAndSeconds(time)
     }
 
     // Update state with new score
