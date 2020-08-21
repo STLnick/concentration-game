@@ -17,7 +17,7 @@ form {
   align-items: center;
   border: 2px solid var(--primary-green-dark);
   border-radius: 10px;
-  display: none;
+  display: flex;
   flex-direction: column;
   height: 10rem;
   justify-content: space-evenly;
