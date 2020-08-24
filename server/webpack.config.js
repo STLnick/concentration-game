@@ -3,6 +3,6 @@ module.exports = {
   mode: 'development',
   entry: './server.js',
   resolve: {
-    modules: ['backend', 'node_modules'],
+    modules: ['server', 'node_modules'],
   },
 };
