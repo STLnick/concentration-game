@@ -10,7 +10,7 @@ const tableVariants = {
   },
   visible: {
     opacity: 1,
-    transition: { delay: 2.5, duration: 1 }
+    transition: { delay: 2, duration: 1 }
   }
 }
 
