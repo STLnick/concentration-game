@@ -1,17 +1,17 @@
-import express from 'express'
+import express from 'express';
 
-import { addScore, getScores } from '../db/index'
+import { addScore, getScores } from '../db';
 
-const router = express.Router()
+const router = express.Router();
 
 router.get('/', async (_, res) => {
-  res.status(200)
-  res.send(await getScores())
-})
+  res.status(200);
+  res.send(await getScores());
+});
 
 router.post('/add', async (req, res) => {
-  res.status(201)
-  res.json(await addScore(req.body))
-})
+  res.status(201);
+  res.json(await addScore(req.body));
+});
 
-export default router
+export default router;

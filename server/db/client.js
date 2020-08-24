@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { MongoClient } from 'mongodb';
 
-dotenv.config()
+dotenv.config();
 
 const client = new MongoClient(
   process.env.MONGODB_URI,
@@ -11,7 +11,7 @@ const client = new MongoClient(
 );
 
 (async () => {
-  client.connect()
+  client.connect();
 
   process.on('SIGINT', () => {
     client.close().then(() => {
@@ -20,7 +20,7 @@ const client = new MongoClient(
       // Avoid plugging up ports - ensures all processes are stopped
       process.exit(0);
     });
-  })
-})()
+  });
+})();
 
-export default client
+export default client;
