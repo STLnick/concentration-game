@@ -62,14 +62,38 @@ export const App = () => {
       time: utils.secondsToMinutesAndSeconds(time)
     }
 
-    // Update state with new score
-    setScores(prevScores => {
-      return [...prevScores, newScore]
-    })
-
     document.querySelector('#form-btn').disabled = true;
 
-    const res = await scoresRepo.addScore(newScore)
+    // If there are less than 10 scores just add the new score no matter what
+    if (scores.length < 10) {
+      // Update state with new score
+      setScores(prevScores => {
+        return [...prevScores, newScore]
+      })
+
+      const addRes = await scoresRepo.addScore(newScore)
+    }
+    // If there are 10 scores already determine if new score qualifies as Top 10, if so remove lowest score and add in new score
+    else {
+      const lowestScore = scores
+        .sort((a, b) => utils.minutesAndSecondsToSeconds(a.time) - utils.minutesAndSecondsToSeconds(b.time))[scores.length - 1]
+
+      // Does new score qualify as Top 10?
+      if (utils.minutesAndSecondsToSeconds(newScore.time) < utils.minutesAndSecondsToSeconds(lowestScore.time)) {
+        // Remove lowest score
+        setScores(prevScores => prevScores.filter(score => score._id !== lowestScore._id))
+
+        // Add to state
+        setScores(prevScores => {
+          return [...prevScores, newScore]
+        })
+
+        // Delete lowest score
+        const deleteRes = await scoresRepo.replaceScore(lowestScore, newScore)
+      }
+    }
+
+
   }
 
   return (

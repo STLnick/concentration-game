@@ -30,5 +30,15 @@ export default (purpose) => purpose === 'cards' ? ({
         }
       })
       return await res.json()
+    },
+    async replaceScore(scoreToDelete, newScore) {
+      const res = await fetch('http://localhost:5000/scores/replace', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(scoreToDelete, newScore)
+      })
+      return await res.json()
     }
   })
