@@ -2,18 +2,21 @@ import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
+  useLocation
 } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 import api from 'api'
 import utils from 'utils'
 
-import { GameBoard, GameOver, HowToPlay, Welcome } from './components'
+import { GameBoard, GameOver, Header, HowToPlay, Welcome } from './components'
 
 import './App.css';
 
 const scoresRepo = api('scores')
 
 export const App = () => {
+  const location = useLocation()
   const [numPairs, setNumPairs] = useState(0)
   const [scores, setScores] = useState([])
   const [time, setTime] = useState(0)
@@ -70,26 +73,29 @@ export const App = () => {
   }
 
   return (
-    <Router>
-      <Switch>
-        <Route path="/game">
-          <GameBoard
-            clickHandler={handleClick}
-            numCards={numPairs}
-            time={time}
-            toggle={handleTimerIsRunning}
-          />
-        </Route>
-        <Route path="/gameover">
-          <GameOver handler={handleSubmit} scores={scores} />
-        </Route>
-        <Route path="/howtoplay">
-          <HowToPlay />
-        </Route>
-        <Route exact path="/">
-          <Welcome scores={scores} />
-        </Route>
-      </Switch>
-    </Router>
+    <>
+      <Header />
+      <AnimatePresence>
+        <Switch location={location} key={location.key}>
+          <Route path="/game">
+            <GameBoard
+              clickHandler={handleClick}
+              numCards={numPairs}
+              time={time}
+              toggle={handleTimerIsRunning}
+            />
+          </Route>
+          <Route path="/gameover">
+            <GameOver handler={handleSubmit} scores={scores} />
+          </Route>
+          <Route path="/howtoplay">
+            <HowToPlay />
+          </Route>
+          <Route exact path="/">
+            <Welcome scores={scores} />
+          </Route>
+        </Switch>
+      </AnimatePresence>
+    </>
   );
 }

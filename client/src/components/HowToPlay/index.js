@@ -1,10 +1,34 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+    x: '100vw'
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      delay: 1,
+      duration: 1.25
+    }
+  },
+  exit: {
+    x: '-100vw',
+    transition: { ease: 'easeInOut' }
+  }
+}
 
 export const HowToPlay = () => {
 
   return (
-    <div className="container rules-container">
+    <motion.div className="container rules-container"
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      variants={containerVariants}>
       <h2 className="rules-title">How To Play Concentration</h2>
       <div className="rules">
         <ul className="rules-list">
@@ -17,6 +41,6 @@ export const HowToPlay = () => {
       </div>
       <Link className="link" to="/">Welcome Page</Link>
       <Link className="link" to="/game">Start the Game</Link>
-    </div>
+    </motion.div>
   )
 }

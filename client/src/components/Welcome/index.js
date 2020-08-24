@@ -1,25 +1,45 @@
-import React from 'react'
-import { StyleRoot } from 'radium';
+import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import React from 'react'
 
 import { HighScores } from '../HighScores'
 
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+    x: '100vw'
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      delay: 1,
+      duration: 1.25
+    }
+  },
+  exit: {
+    x: '-100vw',
+    transition: { ease: 'easeInOut' }
+  }
+}
+
 export const Welcome = ({ scores }) => {
   return (
-    <div className="container welcome-container">
-      <h1 className="welcome">Welcome to Concentration!</h1>
-      <div>
-        {/* link to instructions */}
-      </div>
-      <div>
+    <motion.div className="container"
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      variants={containerVariants}>
+      <h1 className="welcome">Welcome to the Game!</h1>
+      <div className="welcome-container">
         <HighScores scores={scores} />
-      </div>
-      <Link className="link" to="/howtoplay">
-        How To Play
+        <Link className="link" to="/howtoplay">
+          How To Play
         </Link>
-      <Link className="link" to="/game">
-        Start the Game
-      </Link>
-    </div>
+        <Link className="link" to="/game">
+          Start the Game
+        </Link>
+      </div>
+    </motion.div>
   )
 }
