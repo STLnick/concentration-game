@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { motion } from 'framer-motion'
+import utils from 'utils'
 
 import './HighScores.css'
 
@@ -19,15 +20,17 @@ export const HighScores = ({ scores }) => {
   // TODO: Sort scores on table with fastest time first
 
   const renderTableRows = () => {
-    return scores.map(({ initials, pairs, time }, i) => {
-      return (
-        <tr key={i}>
-          <td>{initials}</td>
-          <td>{pairs}</td>
-          <td>{time}</td>
-        </tr>
-      )
-    })
+    return scores
+      .sort((a, b) => utils.minutesAndSecondsToSeconds(a.time) - utils.minutesAndSecondsToSeconds(b.time))
+      .map(({ initials, pairs, time }, i) => {
+        return (
+          <tr key={i}>
+            <td>{initials}</td>
+            <td>{pairs}</td>
+            <td>{time}</td>
+          </tr>
+        )
+      })
   }
 
   return (
