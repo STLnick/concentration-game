@@ -38,6 +38,7 @@ export const GameOver = ({ handler, scores }) => {
         <button id="form-btn" type="submit">Submit</button>
       </form>
       <Link className="link-small" to="/">Back to Welcome Page</Link>
+      <Link className="link-small" to="/game">Play Again</Link>
       <div>
         <HighScores scores={scores} />
       </div>
