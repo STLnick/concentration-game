@@ -1,6 +1,6 @@
 .container {
   align-items: center;
-  background: linear-gradient(to bottom, #1a4a1c, #308834 600px);
+
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -9,7 +9,14 @@
 }
 
 .welcome-container {
+  align-items: center;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
   justify-content: space-around;
+  min-height: 80vh;
+  padding-bottom: 2rem;
+  width: 100vw;
 }
 
 .rules-container {
