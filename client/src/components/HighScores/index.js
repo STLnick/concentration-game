@@ -1,7 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { motion } from 'framer-motion'
 
 import './HighScores.css'
+
+const tableVariants = {
+  hidden: {
+    opacity: 0
+  },
+  visible: {
+    opacity: 1,
+    transition: { delay: 2.5, duration: 1 }
+  }
+}
 
 export const HighScores = ({ scores }) => {
 
@@ -18,7 +29,10 @@ export const HighScores = ({ scores }) => {
   }
 
   return (
-    <table>
+    <motion.table
+      initial="hidden"
+      animate="visible"
+      variants={tableVariants}>
       <caption>High Scores</caption>
       <thead>
         <tr>
@@ -30,7 +44,7 @@ export const HighScores = ({ scores }) => {
       <tbody>
         {renderTableRows()}
       </tbody>
-    </table>
+    </motion.table>
   )
 }
 
