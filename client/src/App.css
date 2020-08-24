@@ -1,0 +1,67 @@
+.container {
+  align-items: center;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 2rem;
+  width: 100vw;
+}
+
+.welcome-container {
+  align-items: center;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 80vh;
+  padding-bottom: 2rem;
+  width: 100vw;
+}
+
+.rules-container {
+  justify-content: space-between;
+}
+
+.rules-list-item {
+  color: white;
+  font-size: 20px;
+  margin: 1rem;
+}
+
+.sub-title {
+  color: white;
+  font-size: 48px;
+  font-weight: 200;
+}
+
+.link,
+.link-small {
+  background-color: white;
+  border: 1px solid red;
+  border-radius: 5px;
+  color: red;
+  margin: 1rem;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.4s;
+}
+
+.link:focus,
+.link:hover,
+.link-small:focus,
+.link-small:hover {
+  background-color: red;
+  color: white;
+}
+
+.link {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.link-small {
+  font-size: 16px;
+  font-weight: 600;
+}

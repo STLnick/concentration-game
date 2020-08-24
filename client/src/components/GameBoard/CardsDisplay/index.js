@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
+
 import api from 'api'
 
 import { Card } from './Card'
 
 import './CardsDisplay.css'
 
-export const CardsDisplay = ({ resetHandler, timerHandler, numberOfCards }) => {
+const cardsRepo = api('cards')
+
+export const CardsDisplay = ({ timerHandler, numberOfCards }) => {
   const [cards, setCards] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const history = useHistory()
 
   // Fetch cards and add needed properties to each
   useEffect(() => {
     (async () => {
       setIsLoading(true)
 
-      // If game won message is present remove it
-      if (document.querySelector('.game-notification').classList.contains('game-won')) {
-        document.querySelector('.game-notification').classList.remove('game-won')
-      }
-
-      const fetchedCards = await api.index(numberOfCards)
+      const fetchedCards = await cardsRepo.index(numberOfCards)
 
       // Duplicate cards, shuffle Cards and assign new properties
       const shuffledCardsWithDups = fetchedCards.concat(Array.from(fetchedCards))
@@ -71,33 +71,12 @@ export const CardsDisplay = ({ resetHandler, timerHandler, numberOfCards }) => {
 
         if (!cards.find(({ matched }) => !matched)) {
           timerHandler(false)
-          // Show notification that game is over
-          document.querySelector('.game-notification').classList.add('game-won')
-          // Show form for user to enter name
-          document.querySelector('form').classList.add('game-won-form')
-          // Set Number of Cards to 0: allows user to play again with same number of pairs
-          resetHandler()
+          setTimeout(() => history.push('/gameover'), 2000)
         }
       } else if (flippedCards[0]) {
         resetFlippedCards()
       }
     }
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const userInfo = document.querySelector('.user-info')
-    const name = e.target.querySelector('input').value
-    const time = document.querySelector('.timer').textContent
-
-    // Hide form
-    document.querySelector('form').classList.remove('game-won-form')
-
-    // Put info inside user-info div
-    userInfo.innerHTML += `<div class="user">
-      <h3>${name}</h3>  ---  <h3>${time}</h3>
-    </div>`
-    userInfo.classList.add('active-user-info')
   }
 
   const renderCards = () => {
@@ -119,19 +98,8 @@ export const CardsDisplay = ({ resetHandler, timerHandler, numberOfCards }) => {
   }
 
   return (
-    <div>
-      <div className="game-notification">You Win!</div>
-      <div className="user-info">
-        <h5>Recent Scores</h5>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="user-name">Enter Your Name</label>
-        <input id="user-name" placeholder="Bobby Boucher" type="text" />
-        <button type="submit">Submit</button>
-      </form>
-      <div className="cards">
-        {isLoading ? <h4 className="loading-msg">Loading Cards...</h4> : renderCards()}
-      </div>
+    <div className="cards">
+      {isLoading ? <h4 className="loading-msg">Loading Cards...</h4> : renderCards()}
     </div>
   )
 }

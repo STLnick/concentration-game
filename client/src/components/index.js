@@ -1,0 +1,5 @@
+export { GameBoard } from './GameBoard'
+export { GameOver } from './GameOver'
+export { Header } from './Header'
+export { HowToPlay } from './HowToPlay'
+export { Welcome } from './Welcome'

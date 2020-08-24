@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import cardBackImg from '../../../../img/cardBack.png'
+
 export const Card = ({ code, flipped, handler, id, imgSrc, matched, suit, value }) => {
   const btnStyle = {
     backgroundColor: '#1A4A1C',
@@ -27,7 +29,7 @@ export const Card = ({ code, flipped, handler, id, imgSrc, matched, suit, value 
     <img
       alt={`${value} of ${suit}`}
       className={animateClass}
-      src={flipped ? imgSrc : 'https://source.unsplash.com/random/100x139'}
+      src={flipped ? imgSrc : cardBackImg}
       style={imgStyle}
       width="100"
     />

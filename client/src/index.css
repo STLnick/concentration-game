@@ -6,6 +6,7 @@
 }
 
 body {
+  background: linear-gradient(to bottom, #1a4a1c, #308834 600px);
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -17,7 +18,7 @@ form {
   align-items: center;
   border: 2px solid var(--primary-green-dark);
   border-radius: 10px;
-  display: none;
+  display: flex;
   flex-direction: column;
   height: 10rem;
   justify-content: space-evenly;
@@ -58,4 +59,10 @@ button {
 button:focus,
 button:hover {
   box-shadow: 0 0 3px 3px white;
+}
+
+button:disabled {
+  background-color: #eee;
+  box-shadow: none;
+  color: #616161;
 }
