@@ -32,13 +32,13 @@ export const Welcome = ({ scores }) => {
       variants={containerVariants}>
       <h1 className="welcome">Welcome to the Game!</h1>
       <div className="welcome-container">
-        <HighScores scores={scores} />
         <Link className="link" to="/howtoplay">
           How To Play
         </Link>
         <Link className="link" to="/game">
           Start the Game
         </Link>
+        <HighScores scores={scores} />
       </div>
     </motion.div>
   )
