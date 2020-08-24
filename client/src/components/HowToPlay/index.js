@@ -12,12 +12,23 @@ const containerVariants = {
     x: 0,
     transition: {
       delay: 0.75,
-      duration: 1.25
+      duration: 1.25,
+      when: 'beforeChildren',
+      staggerChildren: 0.4
     }
   },
   exit: {
     x: '-100vw',
     transition: { ease: 'easeInOut' }
+  }
+}
+
+const listVariants = {
+  hidden: {
+    opacity: 0
+  },
+  visible: {
+    opacity: 1
   }
 }
 
@@ -32,11 +43,26 @@ export const HowToPlay = () => {
       <h3 className="sub-title">How To Play Concentration</h3>
       <div className="rules">
         <ul className="rules-list">
-          <li className="rules-list-item">Pick the amount of pairs you want to play with</li>
-          <li className="rules-list-item">Flip 2 cards at a time</li>
-          <li className="rules-list-item">If those cards match they go away</li>
-          <li className="rules-list-item">If they DON'T match they will flip back over in place</li>
-          <li className="rules-list-item">Try to match all the pairs as fast as possible!</li>
+          <motion.li className="rules-list-item"
+            variants={listVariants}>
+            Pick the amount of pairs you want to play with
+          </motion.li>
+          <motion.li className="rules-list-item"
+            variants={listVariants}>
+            Flip 2 cards at a time
+          </motion.li>
+          <motion.li className="rules-list-item"
+            variants={listVariants}>
+            If those cards match they go away
+          </motion.li>
+          <motion.li className="rules-list-item"
+            variants={listVariants}>
+            If they DON'T match they will flip back over in place
+          </motion.li>
+          <motion.li className="rules-list-item"
+            variants={listVariants}>
+            Try to match all the pairs as fast as possible!
+          </motion.li>
         </ul>
       </div>
       <Link className="link" to="/">Welcome Page</Link>
