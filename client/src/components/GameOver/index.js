@@ -25,6 +25,10 @@ const containerVariants = {
 }
 
 export const GameOver = ({ handler, scores }) => {
+  // TODO: Logic to add a score ONLY IF it is better than a Top 10 score
+
+  // TODO: If we have 10 scores and a new high score is achieved we should DELETE the slowest of the Top 10 and then INSERT the new score
+
   return (
     <motion.div className="container"
       initial="hidden"
