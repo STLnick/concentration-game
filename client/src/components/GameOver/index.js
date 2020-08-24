@@ -31,7 +31,7 @@ export const GameOver = ({ handler, scores }) => {
       animate="visible"
       exit="exit"
       variants={containerVariants}>
-      <h2 className="title">Game Over</h2>
+      <h3 className="sub-title">Game Over</h3>
       <form onSubmit={handler}>
         <label htmlFor="user-name">Enter Your Initials</label>
         <input id="user-name" placeholder="Bobby Boucher" type="text" />

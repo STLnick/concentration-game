@@ -29,7 +29,7 @@ export const HowToPlay = () => {
       animate="visible"
       exit="exit"
       variants={containerVariants}>
-      <h2 className="rules-title">How To Play Concentration</h2>
+      <h3 className="sub-title">How To Play Concentration</h3>
       <div className="rules">
         <ul className="rules-list">
           <li className="rules-list-item">Pick the amount of pairs you want to play with</li>
