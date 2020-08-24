@@ -30,7 +30,7 @@ export const Welcome = ({ scores }) => {
       animate="visible"
       exit="exit"
       variants={containerVariants}>
-      <h3 className="subtitle">Welcome to the Game!</h3>
+      <h3 className="sub-title">Welcome to the Game!</h3>
       <div className="welcome-container">
         <Link className="link" to="/howtoplay">
           How To Play
