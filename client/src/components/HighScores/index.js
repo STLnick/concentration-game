@@ -16,9 +16,6 @@ const tableVariants = {
 }
 
 export const HighScores = ({ scores }) => {
-
-  // TODO: Sort scores on table with fastest time first
-
   const renderTableRows = () => {
     return scores
       .sort((a, b) => utils.minutesAndSecondsToSeconds(a.time) - utils.minutesAndSecondsToSeconds(b.time))
