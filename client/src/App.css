@@ -1,9 +1,8 @@
 .container {
   align-items: center;
-
+  background-color: transparent;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   padding-bottom: 2rem;
   width: 100vw;
 }
@@ -21,6 +20,11 @@
 
 .rules-container {
   justify-content: space-between;
+  min-height: 80vh;
+}
+
+.rules-list {
+  padding: 0;
 }
 
 .rules-list-item {
@@ -33,6 +37,7 @@
   color: white;
   font-size: 48px;
   font-weight: 200;
+  margin: 0.5rem 0 0;
 }
 
 .link,
