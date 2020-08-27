@@ -1,8 +1,11 @@
 {
   "name": "concentration-game",
   "version": "1.0.0",
-  "description": "",
+  "description": "A card game that keeps high scores",
   "main": "index.js",
+  "engines": {
+    "yarn": "1.x"
+  },
   "scripts": {
     "postinstall": "cd client && yarn build"
   },
