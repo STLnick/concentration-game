@@ -1,0 +1,20 @@
+{
+  "name": "concentration-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "cd client && yarn build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/STLnick/concentration-game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/STLnick/concentration-game/issues"
+  },
+  "homepage": "https://github.com/STLnick/concentration-game#readme"
+}
