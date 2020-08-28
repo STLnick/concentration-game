@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-  BrowserRouter as Router,
   Route,
   Switch,
   useLocation
@@ -71,7 +70,7 @@ export const App = () => {
         return [...prevScores, newScore]
       })
 
-      const addRes = await scoresRepo.addScore(newScore)
+      await scoresRepo.addScore(newScore)
     }
     // If there are 10 scores already determine if new score qualifies as Top 10, if so remove lowest score and add in new score
     else {
@@ -89,7 +88,7 @@ export const App = () => {
         })
 
         // Delete lowest score
-        const deleteRes = await scoresRepo.replaceScore(lowestScore, newScore)
+        await scoresRepo.replaceScore(lowestScore, newScore)
       }
     }
 
