@@ -13,7 +13,7 @@ export default (purpose) => purpose === 'cards' ? ({
 }) :
   ({
     async addScore(newScore) {
-      const res = await fetch('http://localhost:5000/scores/add', {
+      const res = await fetch('http://game-concentration.herokuapp.com/scores/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -23,7 +23,7 @@ export default (purpose) => purpose === 'cards' ? ({
       return await res.json()
     },
     async getScores() {
-      const res = await fetch('http://localhost:5000/scores/', {
+      const res = await fetch('http://game-concentration.herokuapp.com/scores/', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -32,7 +32,7 @@ export default (purpose) => purpose === 'cards' ? ({
       return await res.json()
     },
     async replaceScore(scoreToDelete, newScore) {
-      const res = await fetch('http://localhost:5000/scores/replace', {
+      const res = await fetch('http://game-concentration.herokuapp.com//scores/replace', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
