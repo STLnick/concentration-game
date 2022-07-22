@@ -1,14 +1,9 @@
-import cors from 'cors';
-import express from 'express';
+const cors = require('cors');
+const express = require('express');
 
-import scores from './routes/scores';
+const scores = require('./routes/scores');
 
 const app = express();
-
-// testing
-app.get('/', (_, res) => {
-  res.send('<h1>Hello from Express Server!</h1>');
-});
 
 app.use(cors());
 app.use(express.json());

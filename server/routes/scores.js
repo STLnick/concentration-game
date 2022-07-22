@@ -1,6 +1,6 @@
-import express from 'express';
+const express = require('express');
 
-import { addScore, getScores, replaceScore } from '../db';
+const { addScore, getScores, replaceScore } = require('../db');
 
 const router = express.Router();
 
@@ -19,4 +19,4 @@ router.put('/replace', async (req, res) => {
   res.json(await replaceScore(req.body));
 });
 
-export default router;
+module.exports = router;

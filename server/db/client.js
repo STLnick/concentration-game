@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
 dotenv.config();
@@ -25,4 +25,4 @@ const client = new MongoClient(
   });
 })();
 
-export default client;
+module.exports = client;

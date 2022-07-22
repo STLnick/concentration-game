@@ -1,7 +1,7 @@
-import { ObjectId } from 'mongodb';
-import client from './client';
+const { ObjectId } = require('mongodb');
+const client = require('./client');
 
-export const getScores = async () => {
+module.exports.getScores = async () => {
   try {
     return await client.db('highscores').collection('scores').find().toArray();
   } catch (err) {
@@ -9,7 +9,7 @@ export const getScores = async () => {
   }
 };
 
-export const addScore = async (score) => {
+module.exports.addScore = async (score) => {
   try {
     return await client.db('highscores').collection('scores').insertOne(score);
   } catch (err) {
@@ -17,7 +17,7 @@ export const addScore = async (score) => {
   }
 };
 
-export const replaceScore = async (scoreToDelete, newScore) => {
+module.exports.replaceScore = async (scoreToDelete, newScore) => {
   try {
     return await client.db('highscores').collection('scores').replaceOne({ _id: ObjectId(scoreToDelete._id) }, newScore);
   } catch (err) {
