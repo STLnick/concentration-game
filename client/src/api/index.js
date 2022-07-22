@@ -32,7 +32,7 @@ export default (purpose) => purpose === 'cards' ? ({
       return await res.json()
     },
     async replaceScore(scoreToDelete, newScore) {
-      const res = await fetch('https://game-concentration.herokuapp.com//scores/replace', {
+      const res = await fetch('https://game-concentration.herokuapp.com/scores/', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
