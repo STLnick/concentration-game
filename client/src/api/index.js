@@ -37,7 +37,7 @@ export default (purpose) => purpose === 'cards' ? ({
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(scoreToDelete, newScore)
+        body: JSON.stringify({ scoreToDelete, newScore })
       })
       return await res.json()
     }

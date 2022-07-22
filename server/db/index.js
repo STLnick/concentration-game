@@ -17,9 +17,10 @@ module.exports.addScore = async (score) => {
   }
 };
 
-module.exports.replaceScore = async (scoreToDelete, newScore) => {
+module.exports.replaceScore = async ({ scoreToDelete, newScore }) => {
   try {
-    return await client.db('highscores').collection('scores').replaceOne({ _id: ObjectId(scoreToDelete._id) }, newScore);
+    return await client.db('highscores').collection('scores')
+      .replaceOne({ _id: ObjectId(scoreToDelete._id) }, newScore);
   } catch (err) {
     throw new Error(err);
   }
